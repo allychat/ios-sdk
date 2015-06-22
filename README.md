@@ -5,3 +5,4 @@
 2. Add libicucore.a to your project.
 3. Add the -ObjC linker flag to your project.
 
+![image](https://github.com/allychat/ios-sdk/blob/master/Support/image.png)
