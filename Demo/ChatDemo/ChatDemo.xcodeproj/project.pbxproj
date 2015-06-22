@@ -814,8 +814,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Volumes/HDD/Alex_/allychat-ios/Library/Binary",
-					"/Volumes/HDD/Alex_/allychat-ios",
+					"${SRCROOT}/../../",
 				);
 				INFOPLIST_FILE = ChatDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -831,8 +830,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Volumes/HDD/Alex_/allychat-ios/Library/Binary",
-					"/Volumes/HDD/Alex_/allychat-ios",
+					"${SRCROOT}/../../",
 				);
 				INFOPLIST_FILE = ChatDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;

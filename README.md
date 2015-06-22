@@ -8,3 +8,9 @@ You can add framework to your project in 3 easy steps:
 
 
 ![image](https://github.com/allychat/ios-sdk/blob/master/Support/image.png)
+
+
+# Socket
+
+Now [socket](https://github.com/square/SocketRocket) is in the framework. We will separate it from the framework as soon as possible. 
+
