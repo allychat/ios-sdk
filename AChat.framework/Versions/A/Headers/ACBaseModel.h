@@ -9,14 +9,4 @@
 #import <Foundation/Foundation.h>
 
 @interface ACBaseModel : NSObject
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary NS_DESIGNATED_INITIALIZER;
-
-+ (instancetype)modelWithDictionary:(NSDictionary *)dictionary;
-
-- (void)setDictionaryRepresentation:(NSDictionary *)dictionaryRepresentation;
-
-- (BOOL)validateDictionaryRepresentation:(NSDictionary *)dictionaryRepresentation;
-
-@property (nonatomic, readonly) NSMutableDictionary          *mutableDictionaryRepresentation;
-
 @end

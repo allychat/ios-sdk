@@ -21,7 +21,7 @@
 - (void)setAlias:(NSString *)alias {
     if (_alias != alias) {
         _alias = alias;
-        [SharedData sharedData].engine = [[ACEngine alloc] initWithURL:[NSURL URLWithString:@"https://sense-dev.achat.octoberry.net/"] alias:alias];
+        [SharedData sharedData].engine = [[ACEngine alloc] initWithURL:[NSURL URLWithString:@"https://my.allychat.ru"] alias:alias];
         
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [[SharedData sharedData].engine roomsWithCompletion:^(NSArray *rooms, NSError *error) {

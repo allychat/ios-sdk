@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <AChat/ACMessageModel.h>
-#import <AChat/ACUserInfoModel.h>
+#import <AChat/ACUserModel.h>
 
 //! Project version number for AChat.
 FOUNDATION_EXPORT double AChatVersionNumber;
@@ -36,7 +36,7 @@ typedef NS_ENUM(NSInteger, AChatStatus) {
 @property (nonatomic, readonly) NSURL           *URL;
 @property (nonatomic, readonly) NSString        *alias;
 @property (nonatomic, readonly) AChatStatus     status;
-@property (nonatomic, readonly) ACUserInfoModel *userInfoModel;
+@property (nonatomic, readonly) ACUserModel     *userModel;
 
 @property (nonatomic, weak) id<AChatDelegate> delegate;
 

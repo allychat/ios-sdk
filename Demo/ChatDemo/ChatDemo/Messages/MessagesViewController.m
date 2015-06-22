@@ -65,7 +65,7 @@
 {
     [super viewDidLoad];
     
-    self.senderId = [SharedData sharedData].engine.userInfoModel.user.userID;
+    self.senderId = [SharedData sharedData].engine.userModel.userID;
     self.senderDisplayName = @"";
     
     JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
@@ -82,7 +82,7 @@
     
     self.avatars = [NSMutableDictionary dictionary];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        NSData *data = [NSData dataWithContentsOfURL:[SharedData sharedData].engine.userInfoModel.user.avatarURL];
+        NSData *data = [NSData dataWithContentsOfURL:[SharedData sharedData].engine.userModel.avatarURL];
         UIImage *image = [UIImage imageWithData:data];
         if (!image) return;
         

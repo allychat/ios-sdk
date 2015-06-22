@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>AD2F28BB-420C-44C1-A903-689EDC2FE21D</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>ChatDemo</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>5F46CC39B468958B55DDEC561E981904AA84757E</key>
 		<string>https://github.com/octoberry/allychat-ios</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Demo/ChatDemo/ChatDemo.xcodeproj/project.xcworkspace</string>
+	<string>Demo/ChatDemo/ChatDemo.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>5F46CC39B468958B55DDEC561E981904AA84757E</key>
