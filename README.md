@@ -2,7 +2,7 @@
 
 # Quick start
 You can add framework to your project in 3 easy steps:
-  1. Drag-n-drop framework from "Library/Binary/"
+  1. Drag-n-drop AChat.framework
   2. Add libicucore.dylib 
   3. Add the -ObjC linker flag 
 
