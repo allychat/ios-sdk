@@ -1,3 +1,4 @@
+
 //
 //  ACMessageModel.h
 //  ACChat
@@ -16,8 +17,22 @@
 @property (nonatomic, strong) NSString  *roomID;
 
 @property (nonatomic, strong) NSString  *message;
-@property (nonatomic, strong) NSURL     *fileAttachmentURL;
+@property (nonatomic, strong) NSString  *fileAttachmentURL;
 
 @property (nonatomic, strong) NSDate    *sentDate;
+
+@property (nonatomic, strong) NSString *issue;
+
+/*
+    Signature
+ */
+@property (nonatomic, strong) NSString *client_id;
+
+-(instancetype)initSenderId:(NSString *)userId
+                     roomId:(NSString *)roomId
+                    message:(NSString *)message
+                   clientId:(NSString *)clientId
+          fileAttachmentURL:(NSString *)fileAttachmentURL
+                andSentDate:(NSDate *)sentDate;
 
 @end

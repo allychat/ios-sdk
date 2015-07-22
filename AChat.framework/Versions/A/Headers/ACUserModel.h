@@ -11,9 +11,14 @@
 @interface ACUserModel : ACBaseModel
 
 @property (nonatomic, strong) NSString  *userID;
-@property (nonatomic, strong) NSString  *name;//does not supported yet
-@property (nonatomic, strong) NSURL     *avatarURL;
+@property (nonatomic, strong) NSString  *name;
+@property (nonatomic, strong) NSString  *avatarUrl;
 
 @property (nonatomic, strong) NSString  *alias;
+
+-(instancetype)initWithUserId:(NSString *)userId
+                         name:(NSString *)name
+                        alias:(NSString *)alias
+                 andAvatarURL:(NSString *)avatarUrl;
 
 @end

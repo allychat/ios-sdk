@@ -13,5 +13,6 @@
 #import <AChat/ACMessageModel.h>
 #import <AChat/ACRoomModel.h>
 #import <AChat/ACUserModel.h>
+#import <AChat/ACOperatorModel.h>
 
 #endif
