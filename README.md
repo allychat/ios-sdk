@@ -38,8 +38,8 @@ This is a full native iPhone app to create realtime chat with AllyChatSDK.
 ## Installation
 From [CocoaPods](http://cocoapods.org):
 ````ruby
-# Get the latest on master
-pod 'AChat', :git => "https://github.com/allychat/ios-sdk.git", :tag => "0.0.1"
+# For latest release in cocoapods
+pod 'AChat', :git => "https://github.com/allychat/ios-sdk.git"
 ````
 
 Without CocoaPods:
