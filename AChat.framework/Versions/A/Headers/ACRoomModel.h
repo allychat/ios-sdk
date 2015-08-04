@@ -17,6 +17,8 @@
 
 @property (nonatomic, assign, getter=isSupportRoom) BOOL supportRoom;
 
+@property (nonatomic, assign) NSUInteger unreadMessages;
+
 @property (nonatomic, strong) ACMessageModel *lastMessage;
 
 @property (nonatomic, strong) NSArray *users;//identifiers

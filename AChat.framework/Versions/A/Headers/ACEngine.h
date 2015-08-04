@@ -97,30 +97,18 @@ withExternalTokenCompletion:(NSString* (^)(void))externalTokenCompletion;
 
 #pragma mark - Messages
 
-- (void)messageForId:(NSString *)messageId
-      withCompletion:(void(^)(NSError *error, ACMessageModel *message))completion;
-
-- (void)messagesForIds:(NSArray *)ids
-        withCompletion:(void(^)(NSError *error, NSArray *messages))completion;
-
+- (void)sendImageMessage:(UIImage *)image
+                   roomId:(NSString *)roomId
+               completion:(void(^)(NSError *error, ACMessageModel *message))completion;
 
 - (void)sendImageMessage:(UIImage *)image
-                  roomId:(NSString *)roomId
-                signature:(NSString *)signature
-              completion:(void(^)(NSError *error))completion;
-
-- (void)sendImageMessage:(UIImage *)image
-                  roomId:(NSString *)roomID
-                signature:(NSString *)signature
-              completion:(void(^)(NSError *error))completion
-                progress:(void(^)(CGFloat progress))progress;
+                   roomId:(NSString *)roomID
+               completion:(void(^)(NSError *error, ACMessageModel *message))completion
+                 progress:(void(^)(CGFloat progress))progress;
 
 - (void)sendTextMessage:(NSString *)text
                  roomId:(NSString *)roomID
-               signature:(NSString *)signature
-             completion:(void(^)(NSError *error))completion;
-
-
+             completion:(void(^)(NSError *error, ACMessageModel *message))completion;
 
 - (void)readMessage:(NSString *)messageID
          completion:(void(^)(NSError *error, bool isComplete))completion;

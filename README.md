@@ -115,29 +115,26 @@ Load earlier Messages (before Last One) of the Room
 
 #### Send Messages
 
-Simple text message (by using WebSockets). `signature` string can be used to confirm incoming messages (or can be **nill**). 
+Simple text message (by using WebSockets).
 ````objective-c   
 - (void)sendTextMessage:(NSString *)text
                  roomId:(NSString *)roomID
-               signature:(NSString *)signature
-             completion:(void(^)(NSError *error))completion;
+             completion:(void(^)(NSError *error, ACMessageModel *message))completion;
 ````
 
-Image sending contains of 2 operation:
+Image sending contains of 2 inner operation:
 - upload image data by REST (progress available);
 - get Url of image and send with WebSockets method.
 
 ````objective-c   
 - (void)sendImageMessage:(UIImage *)image
-                  roomId:(NSString *)roomId
-                signature:(NSString *)signature
-              completion:(void(^)(NSError *error))completion;
+                   roomId:(NSString *)roomId
+               completion:(void(^)(NSError *error, ACMessageModel *message))completion;
 
 - (void)sendImageMessage:(UIImage *)image
-                  roomId:(NSString *)roomID
-                signature:(NSString *)signature
-              completion:(void(^)(NSError *error))completion
-                progress:(void(^)(CGFloat progress))progress;
+                   roomId:(NSString *)roomID
+               completion:(void(^)(NSError *error, ACMessageModel *message))completion
+                 progress:(void(^)(CGFloat progress))progress;
 ````
 
 #### Operate With Users
@@ -184,6 +181,11 @@ If your object conforms to the `AChatDelegate` protocol you can receive the noti
 You can also get rooms from engine by calling:
 ````objective-c
 - (NSArray *)rooms;
+````
+
+Room has the count of unread messages:
+````objective-c
+NSUInteger unreadMessages;
 ````
 
 #### Push Notifications
