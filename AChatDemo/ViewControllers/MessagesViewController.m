@@ -38,34 +38,15 @@
     //Check if Message from current Room
     if ([msgObject.roomID isEqualToString:self.room.roomID])
     {
-        //Outcomming message received
-        if ([msgObject.senderID isEqualToString:self.senderId])
-        {
-            [self.messages enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                AllyChatMessage *message = obj;
-                
-                //Compare signature of received message with array of mesages
-                if (([message.signature isEqualToString:msgObject.client_id]) && [message.status isEqualToString:STATUS_SENDING]) {
-                    message.model = msgObject;
-                    message.status = STATUS_SENT;
-                    *stop = true;
-                    [self finishReceivingMessageAnimated:YES];
-                }
-            }];
-        }
-        //Incomming message received
-        else
-        {
-            [self addAllyChatMesage:msgObject];
-            [self finishReceivingMessageAnimated:YES];
-            
-            //Mark it read
-            [[SharedEngine shared].engine readMessage:msgObject.messageID completion:^(NSError *error, bool isComplete) {
-                if (!isComplete) {
-                    NSLog(@"%@", error);
-                }
-            }];
-        }
+        [self addAllyChatMesage:msgObject];
+        [self finishReceivingMessageAnimated:YES];
+        
+        //Mark it read
+        [[SharedEngine shared].engine readMessage:msgObject.messageID completion:^(NSError *error, bool isComplete) {
+            if (!isComplete) {
+                NSLog(@"%@", error);
+            }
+        }];
     }
     else
     {
@@ -110,7 +91,6 @@
 -(void)addAllyChatMesage:(ACMessageModel *)messageModel
 {
     AllyChatMessage *message = nil;
-    
     AllyChatUser *user = self.chatUsers[messageModel.senderID];
     NSString *senderDisplayName = user?user.senderDisplayName:@"";
     
@@ -121,7 +101,6 @@
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
             NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:messageModel.fileAttachmentURL]];
             item.image = [UIImage imageWithData:data];
-            
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.collectionView reloadData];
             });
@@ -132,7 +111,7 @@
         message = [[AllyChatMessage alloc] initWithSenderId:messageModel.senderID senderDisplayName:senderDisplayName date:messageModel.sentDate text:messageModel.message];
     }
     message.model = messageModel;
-    message.status = STATUS_SENT;
+    message.status = messageModel.status;
     [self.messages addObject:message];
 }
 
@@ -179,42 +158,36 @@
 - (void)messageSend:(NSString *)text
             picture:(UIImage *)picture
 {
-    
-    AllyChatMessage *message = nil;
-    
-    //Create signature for Message
-    NSString *uuid = [NSUUID UUID].UUIDString;
-    
-    if (picture) {
-        JSQPhotoMediaItem *item = [[JSQPhotoMediaItem alloc] initWithImage:picture];
-        message = [[AllyChatMessage alloc] initWithSenderId:self.senderId senderDisplayName:self.senderDisplayName date:[NSDate date] media:item];
-        [[SharedEngine shared].engine sendImageMessage:picture roomId:self.room.roomID signature:uuid completion:^(NSError *error) {
+    if (picture)
+    {
+        [[SharedEngine shared].engine sendImageMessage:picture roomId:self.room.roomID completion:^(NSError *error, ACMessageModel *message) {
             if (error) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"CLose" otherButtonTitles:nil, nil];
                 [alert show];
             }
             else
             {
-                message.status = STATUS_SENT;
+                [JSQSystemSoundPlayer jsq_playMessageSentSound];
+                [self addAllyChatMesage:message];
                 [self finishSendingMessageAnimated:YES];
             }
         }];
     }
     else
     {
-        message = [[AllyChatMessage alloc] initWithSenderId:self.senderId senderDisplayName:self.senderDisplayName date:[NSDate date] text:text];
-        [[SharedEngine shared].engine sendTextMessage:text roomId:self.room.roomID signature:uuid completion:^(NSError *error) {
+        [[SharedEngine shared].engine sendTextMessage:text roomId:self.room.roomID completion:^(NSError *error, ACMessageModel *message) {
             if (error) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"CLose" otherButtonTitles:nil, nil];
                 [alert show];
             }
+            else
+            {
+                [JSQSystemSoundPlayer jsq_playMessageSentSound];
+                [self addAllyChatMesage:message];
+                [self finishSendingMessageAnimated:YES];
+            }
         }];
     }
-    [JSQSystemSoundPlayer jsq_playMessageSentSound];
-    message.signature = uuid;
-    message.status = STATUS_SENDING;
-    [self.messages addObject:message];
-    [self finishSendingMessageAnimated:YES];
 }
 
 #pragma mark -
@@ -239,7 +212,7 @@
      */
     self.senderId = [SharedEngine shared].engine.userModel.userID;
     self.senderDisplayName = [SharedEngine shared].engine.userModel.alias;
-
+    
     /**
      *  Remove avatars for output messages
      */
@@ -385,10 +358,12 @@
 {
     if ([self outgoing:self.messages[indexPath.item]])
     {
-       AllyChatMessage *message = [self.messages objectAtIndex:indexPath.item];
-        return [[NSAttributedString alloc] initWithString:message.status];
+        AllyChatMessage *message = [self.messages objectAtIndex:indexPath.item];
+        if (message.status) {
+            return [[NSAttributedString alloc] initWithString:message.status];
+        }
     }
-    else return nil;
+    return nil;
 }
 
 #pragma mark - UICollectionView DataSource

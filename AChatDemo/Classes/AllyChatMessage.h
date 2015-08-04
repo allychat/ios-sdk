@@ -15,6 +15,4 @@
 
 @property(nonatomic, strong)NSString *status;
 
-@property(nonatomic, strong)NSString *signature;
-
 @end

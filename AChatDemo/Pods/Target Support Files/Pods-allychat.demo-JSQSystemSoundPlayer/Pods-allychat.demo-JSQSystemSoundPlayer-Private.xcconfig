@@ -1,0 +1,6 @@
+#include "Pods-allychat.demo-JSQSystemSoundPlayer.xcconfig"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/JSQSystemSoundPlayer" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AChat" "${PODS_ROOT}/Headers/Public/JSQMessagesViewController" "${PODS_ROOT}/Headers/Public/JSQSystemSoundPlayer"
+OTHER_LDFLAGS = ${PODS_ALLYCHAT_DEMO_JSQSYSTEMSOUNDPLAYER_OTHER_LDFLAGS} -ObjC
+PODS_ROOT = ${SRCROOT}
+SKIP_INSTALL = YES
