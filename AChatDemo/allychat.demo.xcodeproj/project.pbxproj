@@ -20,7 +20,6 @@
 		1BBA60491B5FF02F007391CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BBA60471B5FF02F007391CF /* Main.storyboard */; };
 		1BBA604B1B5FF052007391CF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BBA604A1B5FF052007391CF /* Images.xcassets */; };
 		1BBA604E1B5FF06C007391CF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BBA604C1B5FF06C007391CF /* LaunchScreen.xib */; };
-		1BBA608D1B6019E8007391CF /* AChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BBA608C1B6019E8007391CF /* AChat.framework */; };
 		1BBA608E1B601A1D007391CF /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B7EDBCE1B55D79900A0CC3D /* libicucore.dylib */; };
 		550A195716DFD01A13547439 /* libPods-allychat.demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA9758BB1B37F23D518B67D9 /* libPods-allychat.demo.a */; };
 /* End PBXBuildFile section */
@@ -61,7 +60,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BBA608E1B601A1D007391CF /* libicucore.dylib in Frameworks */,
-				1BBA608D1B6019E8007391CF /* AChat.framework in Frameworks */,
 				550A195716DFD01A13547439 /* libPods-allychat.demo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
