@@ -18,7 +18,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 
@@ -53,16 +53,9 @@
             self.title.text = @"Support";
             
             //Load avatar of operator if possible
-            [[SharedEngine shared].engine operatorById:_room.lastMessage.senderID withCompletion:^(NSError *error, ACOperatorModel *operatorModel) {
-                if (operatorModel) {
-                    self.avatarView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:operatorModel.avatarUrl]]];
-                }
-            }];
-//            if (_room.lastReadMessageID) {
-//                [[SharedEngine shared].engine messageForId:_room.lastReadMessageID withCompletion:^(NSError *error, ACMessageModel *message) {
-//                    
-//                }];
-//            }
+            if (_room.lastMessage.sender.avatarUrl) {
+                self.avatarView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:_room.lastMessage.sender.avatarUrl]]];
+            }
         }
         else
         {

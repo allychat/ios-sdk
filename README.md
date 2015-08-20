@@ -55,28 +55,22 @@ Check out the included demo project, under the **AChatDemo** directory, which co
 
 ## Getting Started
 
-You need to create ACEngine object to initialize with user's alias and external token. External token should be requested from bank system on the fly.
+You need to create ACEngine object to initialize with user's alias, name (optionally) and application id.
 
 ````objective-c
 // import all the things
 #import <AChat/AChat.h>   
 
-ACEngine *engine = [[ACEngine alloc] initWithURL:[NSURL URLWithString:@"URL"]
-                                           alias:@"ALIAS" name:@"NAME"
-                                andApplicationId:@"APP_ID"
-                     withExternalTokenCompletion:^NSString *{
-    //please return external toke (auth_token)
-    return EXTERNAL_TOKEN;
-}];
+ACEngine *engine = [[ACEngine alloc] initWithURL:[NSURL URLWithString:@"https://my-dev.allychat.ru"] 
+                                           alias:self.alias name:@"MY_DEV_TEST_USER"
+                                andApplicationId:@"APPLICATION_ID"];
 ````
 
 #### Create Simple Chat
 
-Get Available Rooms (one support room creates **automatically** when initialized with alias).
+If you need to start with **Support Team only** you can use this method to get the room and start the chat.
 ````objective-c
-[engine roomsWithCompletion:^(NSArray *rooms, NSError *error) {
-   
-}];
+- (void)getSupportRoomWithCompletion:(void(^)(NSError *error, ACRoomModel *room))completion;
 ````
 
 In order to receive Messages you should conform to the `AChatDelegate` protocol. 
@@ -88,6 +82,17 @@ Received Messages should be marked as `read` with method:
 ````objective-c   
 - (void)readMessage:(NSString *)messageID 
          completion:(void(^)(NSError *error, bool isComplete))completion;
+````
+
+In order to get current Connection Status you should use this `AChatDelegate` protocol method (`AChatStatusOffline`, `AChatStatusConnecting`, `AChatStatusOnline`).
+````objective-c
+-(void)chat:(ACEngine *)engine didUpdateStatusFromStatus:(AChatStatus)oldSstatus toStatus:(AChatStatus)newStatus
+````
+
+When your application comes back to `AChatStatusOnline` to you can use this method to get all missed messages.
+````objective-c
+- (void)unreadMessagesForRoomId:(NSString *)roomId
+                     completion:(void(^)(NSError *error, NSArray *unreadMessages))completion;
 ````
 
 Load last Messages of the Room.
@@ -167,6 +172,13 @@ All Messages have `senderId`. If room is `supportRoom` you should use this metho
 
 #### Operate With Rooms
 
+Get Available Rooms (one support room creates **automatically** when initialized with alias).
+````objective-c
+[engine roomsWithCompletion:^(NSArray *rooms, NSError *error) {
+   
+}];
+````
+
 You can also create room with any other user if his alias exists:
 ````objective-c
 - (void)createRoomWithOpponent:(NSString *)opponentUserId 
@@ -183,7 +195,7 @@ You can also get rooms from engine by calling:
 - (NSArray *)rooms;
 ````
 
-Room has the count of unread messages:
+Room has the count of **unread** messages:
 ````objective-c
 NSUInteger unreadMessages;
 ````

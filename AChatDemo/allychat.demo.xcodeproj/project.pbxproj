@@ -14,7 +14,6 @@
 		1BBA60371B5FEF78007391CF /* ACRoomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BBA60361B5FEF78007391CF /* ACRoomTableViewCell.m */; };
 		1BBA603A1B5FEF82007391CF /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BBA60391B5FEF82007391CF /* MessagesViewController.m */; };
 		1BBA603D1B5FEF8D007391CF /* AllyChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BBA603C1B5FEF8D007391CF /* AllyChatMessage.m */; };
-		1BBA60401B5FEF94007391CF /* AllyChatUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BBA603F1B5FEF94007391CF /* AllyChatUser.m */; };
 		1BBA60431B5FEF9B007391CF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1BBA60411B5FEF9B007391CF /* Info.plist */; };
 		1BBA60441B5FEF9B007391CF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BBA60421B5FEF9B007391CF /* main.m */; };
 		1BBA60491B5FF02F007391CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BBA60471B5FF02F007391CF /* Main.storyboard */; };
@@ -41,8 +40,6 @@
 		1BBA60391B5FEF82007391CF /* MessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessagesViewController.m; path = ViewControllers/MessagesViewController.m; sourceTree = SOURCE_ROOT; };
 		1BBA603B1B5FEF8D007391CF /* AllyChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllyChatMessage.h; path = Classes/AllyChatMessage.h; sourceTree = SOURCE_ROOT; };
 		1BBA603C1B5FEF8D007391CF /* AllyChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllyChatMessage.m; path = Classes/AllyChatMessage.m; sourceTree = SOURCE_ROOT; };
-		1BBA603E1B5FEF94007391CF /* AllyChatUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllyChatUser.h; path = Classes/AllyChatUser.h; sourceTree = SOURCE_ROOT; };
-		1BBA603F1B5FEF94007391CF /* AllyChatUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllyChatUser.m; path = Classes/AllyChatUser.m; sourceTree = SOURCE_ROOT; };
 		1BBA60411B5FEF9B007391CF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Classes/Info.plist; sourceTree = SOURCE_ROOT; };
 		1BBA60421B5FEF9B007391CF /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Classes/main.m; sourceTree = SOURCE_ROOT; };
 		1BBA60481B5FF02F007391CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
@@ -120,15 +117,6 @@
 			name = AllyChatMessage;
 			sourceTree = "<group>";
 		};
-		1B355A781B593DBC0076A3DC /* AllyChatUser */ = {
-			isa = PBXGroup;
-			children = (
-				1BBA603E1B5FEF94007391CF /* AllyChatUser.h */,
-				1BBA603F1B5FEF94007391CF /* AllyChatUser.m */,
-			);
-			name = AllyChatUser;
-			sourceTree = "<group>";
-		};
 		1B44A1FD1B589130008DC1B1 /* ACRoomTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,7 +141,6 @@
 				1BBA60381B5FEF82007391CF /* MessagesViewController.h */,
 				1BBA60391B5FEF82007391CF /* MessagesViewController.m */,
 				1B355A741B593B240076A3DC /* AllyChatMessage */,
-				1B355A781B593DBC0076A3DC /* AllyChatUser */,
 			);
 			name = MessagesViewController;
 			sourceTree = "<group>";
@@ -307,7 +294,6 @@
 				1BBA603D1B5FEF8D007391CF /* AllyChatMessage.m in Sources */,
 				1BBA60311B5FEF65007391CF /* LoginViewController.m in Sources */,
 				1BBA602B1B5FEF44007391CF /* AppDelegate.m in Sources */,
-				1BBA60401B5FEF94007391CF /* AllyChatUser.m in Sources */,
 				1BBA603A1B5FEF82007391CF /* MessagesViewController.m in Sources */,
 				1BBA60441B5FEF9B007391CF /* main.m in Sources */,
 				1BBA60341B5FEF6D007391CF /* ChatRoomsViewController.m in Sources */,
@@ -430,16 +416,12 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"/Users/alexandrturyev/Documents/Octoberry/allychat-ios-sdk",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Classes/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/AChat/build/Debug-iphoneos",
-					"/Users/alexandrturyev/Documents/Octoberry/allychat-ios/AChat/build/Debug-iphoneos",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = allychat.demo;
+				PROVISIONING_PROFILE = "54520f1c-63dd-4e5a-8c81-960a5c557514";
 			};
 			name = Debug;
 		};
@@ -452,16 +434,12 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"/Users/alexandrturyev/Documents/Octoberry/allychat-ios-sdk",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Classes/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/AChat/build/Debug-iphoneos",
-					"/Users/alexandrturyev/Documents/Octoberry/allychat-ios/AChat/build/Debug-iphoneos",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = allychat.demo;
+				PROVISIONING_PROFILE = "54520f1c-63dd-4e5a-8c81-960a5c557514";
 			};
 			name = Release;
 		};

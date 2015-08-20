@@ -8,6 +8,7 @@
 //
 
 #import <AChat/ACBaseModel.h>
+#import "ACUserModel.h"
 
 #define STATUS_SENT @"Delivered"
 #define STATUS_SENDING @"Sending..."
@@ -17,7 +18,9 @@
 
 @property (nonatomic, strong) NSString  *messageID;
 
-@property (nonatomic, strong) NSString  *senderID;
+@property (nonatomic, strong) NSString *senderID;
+
+@property (nonatomic, strong) ACUserModel *sender;
 
 @property (nonatomic, strong) NSString  *roomID;
 

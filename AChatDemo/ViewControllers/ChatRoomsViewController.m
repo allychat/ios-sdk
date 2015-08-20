@@ -26,6 +26,7 @@
     [self.view addSubview:indicatorView];
     [indicatorView startAnimating];
     
+    
     [[SharedEngine shared].engine roomsWithCompletion:^(NSArray *rooms, NSError *error) {
         
         [indicatorView stopAnimating];
@@ -46,16 +47,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //#warning Please input APPLICATION ID and NAME you would like to use
+    [SharedEngine shared].engine = [[ACEngine alloc] initWithURL:[NSURL URLWithString:@"https://my-dev.allychat.ru"]
+                                                           alias:self.alias name:@"MY_DEV_TEST_USER"
+                                                andApplicationId:@"APPLICATION_ID"];
     /*
-     Please input APPLICATION ID and NAME you would like to use
-    */
-    [SharedEngine shared].engine = [[ACEngine alloc] initWithURL:[NSURL URLWithString:@"https://my-dev.allychat.ru"] alias:self.alias name:@"NAME" andApplicationId:@"APP_ID" withExternalTokenCompletion:^NSString *{
-        //please return external toke (auth_token)
-        return self.alias;
-    }];
-    
-    /*
-        Make your app register for remote notifications
+     Make your app register for remote notifications
      */
     [self registerForPushNotifications];
 }
