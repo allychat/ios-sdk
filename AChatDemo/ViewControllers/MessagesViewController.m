@@ -10,7 +10,6 @@
 #import "SharedEngine.h"
 #import <JSQMessagesViewController/JSQMessages.h>
 #import "AllyChatMessage.h"
-#import "AllyChatUser.h"
 
 #define STATUS_SENT @"Delivered"
 #define STATUS_SENDING @"Sending..."
@@ -22,7 +21,7 @@
 
 @property (nonatomic, strong) NSMutableArray *messages;
 
-@property (nonatomic, strong) NSMutableDictionary *chatUsers;
+@property (nonatomic, strong) NSMutableDictionary*avatars;
 
 @property (nonatomic, strong) JSQMessagesBubbleImage* outgoingBubbleImageData;
 @property (nonatomic, strong) JSQMessagesBubbleImage* incomingBubbleImageData;
@@ -32,6 +31,23 @@
 @implementation MessagesViewController
 
 #pragma mark AChat Delegate Methods
+
+-(void)chat:(ACEngine *)engine didUpdateStatusFromStatus:(AChatStatus)oldSstatus toStatus:(AChatStatus)newStatus
+{
+    NSLog(@"%ld - > %ld", oldSstatus, newStatus);
+    
+    if (newStatus == AChatStatusOnline) {
+        
+        [[SharedEngine shared].engine unreadMessagesForRoomId:self.room.roomID completion:^(NSError *error, NSArray *unreadMessages) {
+            for (ACMessageModel *msgObject in unreadMessages) {
+                // if (![self.messages containsObject:msgObject]) {
+                [self addAllyChatMesage:msgObject];
+                [self finishReceivingMessageAnimated:YES];
+                // }
+            }
+        }];
+    }
+}
 
 - (void)chat:(ACEngine *)engine didReceiveMessage:(ACMessageModel *)msgObject
 {
@@ -64,40 +80,16 @@
 
 #pragma mark - AChat methods
 
--(void)loadChatUser:(NSString *)senderId
-{
-    if (self.room.isSupportRoom)
-    {
-        [[SharedEngine shared].engine operatorById:senderId withCompletion:^(NSError *error, ACOperatorModel *operatorModel) {
-            if (operatorModel) {
-                AllyChatUser *chatUser = [AllyChatUser new];
-                chatUser.userModel = operatorModel;
-                self.chatUsers[senderId] = chatUser;
-                [self.collectionView reloadData];
-            }
-        }];
-    }
-    else
-    {
-        [[SharedEngine shared].engine userWithId:senderId completion:^(NSError *error, ACUserModel *user) {
-            AllyChatUser *chatUser = [AllyChatUser new];
-            chatUser.userModel = user;
-            self.chatUsers[senderId] = chatUser;
-            [self.collectionView reloadData];
-        }];
-    }
-}
-
 -(void)addAllyChatMesage:(ACMessageModel *)messageModel
 {
     AllyChatMessage *message = nil;
-    AllyChatUser *user = self.chatUsers[messageModel.senderID];
-    NSString *senderDisplayName = user?user.senderDisplayName:@"";
+    
+    NSString *senderDisplayName = messageModel.sender.name?messageModel.sender.name:messageModel.sender.alias;
     
     if (messageModel.fileAttachmentURL)
     {
         JSQPhotoMediaItem *item = [JSQPhotoMediaItem new];
-        message = [[AllyChatMessage alloc] initWithSenderId:messageModel.senderID senderDisplayName:senderDisplayName date:messageModel.sentDate media:item];
+        message = [[AllyChatMessage alloc] initWithSenderId:messageModel.sender.userID senderDisplayName:senderDisplayName date:messageModel.sentDate media:item];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
             NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:messageModel.fileAttachmentURL]];
             item.image = [UIImage imageWithData:data];
@@ -108,10 +100,9 @@
     }
     else
     {
-        message = [[AllyChatMessage alloc] initWithSenderId:messageModel.senderID senderDisplayName:senderDisplayName date:messageModel.sentDate text:messageModel.message];
+        message = [[AllyChatMessage alloc] initWithSenderId:messageModel.sender.userID senderDisplayName:senderDisplayName date:messageModel.sentDate text:messageModel.message];
     }
     message.model = messageModel;
-    message.status = messageModel.status;
     [self.messages addObject:message];
 }
 
@@ -190,6 +181,22 @@
     }
 }
 
+-(id<JSQMessageAvatarImageDataSource>)getSenderAvatarImage:(AllyChatMessage *)message
+{
+    if (self.avatars[message.model.sender.userID] == nil)
+    {
+        //Load Avatar Image
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.model.sender.avatarUrl]]];
+        if (image) {
+            JSQMessagesAvatarImage *wozImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:image diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+            self.avatars[message.model.sender.userID] = wozImage;
+            return wozImage;
+        }
+        return nil;
+    }
+    else return (self.avatars[message.model.sender.userID]);
+}
+
 #pragma mark -
 
 
@@ -224,7 +231,6 @@
     
     [super viewDidLoad];
     
-    self.chatUsers = [NSMutableDictionary dictionary];
     self.messages = [NSMutableArray array];
     
     [self loadLastMessages:MESSAGES_COUNT];
@@ -306,12 +312,7 @@
     AllyChatMessage *message = [self.messages objectAtIndex:indexPath.item];
     if ([self incoming:message])
     {
-        if (self.chatUsers[message.senderId] == nil)
-        {
-            [self loadChatUser:message.senderId];
-            return nil;
-        }
-        else return ((AllyChatUser *)self.chatUsers[message.senderId]).avatarImage;
+        return [self getSenderAvatarImage:message];
     }
     else
         return nil;
@@ -340,16 +341,7 @@
                 return nil;
             }
         }
-        if (self.chatUsers[message.senderId] == nil)
-        {
-            [self loadChatUser:message.senderId];
-            return nil;
-        }
-        else
-        {
-            NSString *name = ((AllyChatUser *)self.chatUsers[message.senderId]).senderDisplayName;
-            return [[NSAttributedString alloc] initWithString:name];
-        }
+        return [[NSAttributedString alloc] initWithString:(message.model.sender.name)?message.model.sender.name:message.model.sender.alias];
     }
     else return nil;
 }
@@ -359,8 +351,8 @@
     if ([self outgoing:self.messages[indexPath.item]])
     {
         AllyChatMessage *message = [self.messages objectAtIndex:indexPath.item];
-        if (message.status) {
-            return [[NSAttributedString alloc] initWithString:message.status];
+        if (message.model.status) {
+            return [[NSAttributedString alloc] initWithString:message.model.status];
         }
     }
     return nil;

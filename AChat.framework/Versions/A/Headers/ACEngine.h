@@ -84,6 +84,10 @@ withExternalTokenCompletion:(NSString* (^)(void))externalTokenCompletion;
                        completion:(void(^)(NSError *error))completion;
 
 #pragma mark - Rooms
+/*
+    Get the Room with Support Team
+ */
+- (void)getSupportRoomWithCompletion:(void(^)(NSError *error, ACRoomModel *room))completion;
 
 /*
     Get current available Rooms
@@ -120,6 +124,9 @@ withExternalTokenCompletion:(NSString* (^)(void))externalTokenCompletion;
 - (void)firstMessages:(NSNumber *)count
                roomId:(NSString *)roomId
            completion:(void(^)(NSError *, NSArray *))completion;
+
+- (void)unreadMessagesForRoomId:(NSString *)roomId
+                     completion:(void(^)(NSError *error, NSArray *unreadMessages))completion;
 
 - (void)historyForRoomId:(NSString *)roomID
                    limit:(NSNumber*)limit

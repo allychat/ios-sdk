@@ -13,6 +13,4 @@
 
 @property(nonatomic, strong)ACMessageModel *model;
 
-@property(nonatomic, strong)NSString *status;
-
 @end
