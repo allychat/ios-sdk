@@ -19,13 +19,13 @@
 		1BBA60491B5FF02F007391CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BBA60471B5FF02F007391CF /* Main.storyboard */; };
 		1BBA604B1B5FF052007391CF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BBA604A1B5FF052007391CF /* Images.xcassets */; };
 		1BBA604E1B5FF06C007391CF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BBA604C1B5FF06C007391CF /* LaunchScreen.xib */; };
-		1BBA608E1B601A1D007391CF /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B7EDBCE1B55D79900A0CC3D /* libicucore.dylib */; };
+		1BE609721B8DD53800FD16FF /* AChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE609711B8DD53800FD16FF /* AChat.framework */; };
+		1BE609741B8DD54800FD16FF /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE609731B8DD54800FD16FF /* libicucore.dylib */; };
 		550A195716DFD01A13547439 /* libPods-allychat.demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA9758BB1B37F23D518B67D9 /* libPods-allychat.demo.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1B0298561B55D6460078C038 /* allychat.demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = allychat.demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		1B7EDBCE1B55D79900A0CC3D /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		1BBA60291B5FEF44007391CF /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Classes/AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		1BBA602A1B5FEF44007391CF /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Classes/AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		1BBA602C1B5FEF54007391CF /* SharedEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SharedEngine.h; path = Utils/SharedEngine.h; sourceTree = SOURCE_ROOT; };
@@ -45,7 +45,8 @@
 		1BBA60481B5FF02F007391CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
 		1BBA604A1B5FF052007391CF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = SOURCE_ROOT; };
 		1BBA604D1B5FF06C007391CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = SOURCE_ROOT; };
-		1BBA608C1B6019E8007391CF /* AChat.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AChat.framework; path = ../AChat.framework; sourceTree = "<group>"; };
+		1BE609711B8DD53800FD16FF /* AChat.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AChat.framework; path = ../AChat.framework; sourceTree = "<group>"; };
+		1BE609731B8DD54800FD16FF /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		6D33B8193354B087CB3480EF /* Pods-allychat.demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-allychat.demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-allychat.demo/Pods-allychat.demo.release.xcconfig"; sourceTree = "<group>"; };
 		87C5E41DAACBF1334A26EC57 /* Pods-allychat.demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-allychat.demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-allychat.demo/Pods-allychat.demo.debug.xcconfig"; sourceTree = "<group>"; };
 		CA9758BB1B37F23D518B67D9 /* libPods-allychat.demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-allychat.demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,7 +57,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BBA608E1B601A1D007391CF /* libicucore.dylib in Frameworks */,
+				1BE609741B8DD54800FD16FF /* libicucore.dylib in Frameworks */,
+				1BE609721B8DD53800FD16FF /* AChat.framework in Frameworks */,
 				550A195716DFD01A13547439 /* libPods-allychat.demo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -176,8 +178,8 @@
 		C02F9307F9ED7D2E84518E21 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1BBA608C1B6019E8007391CF /* AChat.framework */,
-				1B7EDBCE1B55D79900A0CC3D /* libicucore.dylib */,
+				1BE609731B8DD54800FD16FF /* libicucore.dylib */,
+				1BE609711B8DD53800FD16FF /* AChat.framework */,
 				CA9758BB1B37F23D518B67D9 /* libPods-allychat.demo.a */,
 			);
 			name = Frameworks;
@@ -339,7 +341,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: SERGEY KOPANEV (498F34R739)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -361,7 +363,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "8a8363eb-b759-4ed7-b208-fc5e00fbdb02";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -399,7 +401,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "8a8363eb-b759-4ed7-b208-fc5e00fbdb02";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -416,12 +418,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"/Users/alexandrturyev/Documents/BitBucket/octoberry/allychat-ios-sdk",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Classes/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = allychat.demo;
-				PROVISIONING_PROFILE = "54520f1c-63dd-4e5a-8c81-960a5c557514";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -434,12 +437,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"/Users/alexandrturyev/Documents/BitBucket/octoberry/allychat-ios-sdk",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Classes/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = allychat.demo;
-				PROVISIONING_PROFILE = "54520f1c-63dd-4e5a-8c81-960a5c557514";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

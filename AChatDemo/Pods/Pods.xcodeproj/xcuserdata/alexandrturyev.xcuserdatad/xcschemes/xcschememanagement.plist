@@ -4,12 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-allychat.demo-JSQMessagesViewController.xcscheme</key>
+		<key>JSQMessagesViewController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-allychat.demo-JSQSystemSoundPlayer.xcscheme</key>
+		<key>JSQSystemSoundPlayer.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -22,17 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>3DD13D3D8DCC67583916AF3D</key>
+		<key>0654CC9D248D78E74A20F21AFED2B8A9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>49695B281FDC9D4F0F570787</key>
+		<key>33C88071D323831D8C3ECE890FDCD85E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B21168B8A37D99B68277CDE9</key>
+		<key>B5FFCAC887E166C4C63483E5348845D8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
