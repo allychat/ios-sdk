@@ -51,6 +51,7 @@
     //Check if Message from current Room
     if ([msgObject.roomID isEqualToString:self.room.roomID])
     {
+        //CHECK IF CURRENT MESSAGE IS INCOME
         if (msgObject.isOuput)
         {
             [self addAllyChatMesage:msgObject];
@@ -66,6 +67,10 @@
         else
         {
             [self updateMessageStatus:msgObject];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.collectionView reloadData];
+            });
+            
         }
     }
     else
@@ -203,15 +208,12 @@
 
 -(void)updateMessageStatus:(ACMessageModel *)inputMessage
 {
+    NSLog(@"status: %lu", (unsigned long)inputMessage.status);
     [self.messages enumerateObjectsUsingBlock:^(AllyChatMessage *obj, NSUInteger idx, BOOL *stop) {
         if (obj.model.client_id) {
             if ([obj.model.client_id isEqualToString:inputMessage.client_id]) {
                 obj.model.status = inputMessage.status;
                 *stop = YES;
-            }
-            if (!inputMessage.fileAttachmentURL)
-            {
-                [self.collectionView reloadData];
             }
         }
     }];
