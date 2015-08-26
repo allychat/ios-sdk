@@ -10,9 +10,13 @@
 #import <AChat/ACBaseModel.h>
 #import "ACUserModel.h"
 
-#define STATUS_SENT @"Delivered"
-#define STATUS_SENDING @"Sending..."
-#define STATUS_ERROR @"Error"
+typedef NS_ENUM(NSUInteger, MessageStatus) {
+    STATUS_NEW,
+    STATUS_SENDING,
+    STATUS_RESENDING,
+    STATUS_SENT,
+    STATUS_FAILED
+};
 
 @interface ACMessageModel : ACBaseModel
 
@@ -38,12 +42,18 @@
 /*
     Signature of message
  */
-@property (nonatomic, strong) NSString *client_id;
+@property (nonatomic, retain) NSString *client_id;
 
 /*
     Sending status
  */
-@property (nonatomic, strong) NSString *status;
+@property (atomic,assign) MessageStatus status;
+
+/*
+ Sending status
+ */
+@property (atomic,assign) BOOL isOuput;
+
 
 
 -(instancetype)initSenderId:(NSString *)userId
@@ -52,5 +62,7 @@
                    clientId:(NSString *)clientId
           fileAttachmentURL:(NSString *)fileAttachmentURL
                 andSentDate:(NSDate *)sentDate;
+
+
 
 @end

@@ -11,10 +11,6 @@
 #import <JSQMessagesViewController/JSQMessages.h>
 #import "AllyChatMessage.h"
 
-#define STATUS_SENT @"Delivered"
-#define STATUS_SENDING @"Sending..."
-#define STATUS_ERROR @"Error"
-
 #define MESSAGES_COUNT 5
 
 @interface MessagesViewController ()
@@ -30,11 +26,12 @@
 
 @implementation MessagesViewController
 
+
 #pragma mark AChat Delegate Methods
 
 -(void)chat:(ACEngine *)engine didUpdateStatusFromStatus:(AChatStatus)oldSstatus toStatus:(AChatStatus)newStatus
 {
-    NSLog(@"%ld - > %ld", oldSstatus, newStatus);
+    //NSLog(@"%d - > %d", oldSstatus, newStatus);
     
     if (newStatus == AChatStatusOnline) {
         
@@ -54,15 +51,22 @@
     //Check if Message from current Room
     if ([msgObject.roomID isEqualToString:self.room.roomID])
     {
-        [self addAllyChatMesage:msgObject];
-        [self finishReceivingMessageAnimated:YES];
-        
-        //Mark it read
-        [[SharedEngine shared].engine readMessage:msgObject.messageID completion:^(NSError *error, bool isComplete) {
-            if (!isComplete) {
-                NSLog(@"%@", error);
-            }
-        }];
+        if (msgObject.isOuput)
+        {
+            [self addAllyChatMesage:msgObject];
+            [self finishReceivingMessageAnimated:YES];
+            
+            //Mark it read
+            [[SharedEngine shared].engine readMessage:msgObject.messageID completion:^(NSError *error, bool isComplete) {
+                if (!isComplete) {
+                    NSLog(@"%@", error);
+                }
+            }];
+        }
+        else
+        {
+            [self updateMessageStatus:msgObject];
+        }
     }
     else
     {
@@ -195,6 +199,20 @@
         return nil;
     }
     else return (self.avatars[message.model.sender.userID]);
+}
+
+-(void)updateMessageStatus:(ACMessageModel *)inputMessage
+{
+    [self.messages enumerateObjectsUsingBlock:^(AllyChatMessage *obj, NSUInteger idx, BOOL *stop) {
+        if ([obj.model.client_id isEqualToString:inputMessage.client_id]) {
+            obj.model.status = inputMessage.status;
+            *stop = YES;
+            if (!inputMessage.fileAttachmentURL)
+            {
+                [self.collectionView reloadData];
+            }
+        }
+    }];
 }
 
 #pragma mark -
@@ -336,7 +354,7 @@
         if (indexPath.item > 0)
         {
             JSQMessage *previous = self.messages[indexPath.item-1];
-            if ([previous.senderId isEqualToString:message.senderId])
+            if ([previous.senderId isEqualToString:message.model.sender.userID])
             {
                 return nil;
             }
@@ -352,7 +370,7 @@
     {
         AllyChatMessage *message = [self.messages objectAtIndex:indexPath.item];
         if (message.model.status) {
-            return [[NSAttributedString alloc] initWithString:message.model.status];
+            return [[NSAttributedString alloc] initWithString:[AllyChatMessage getStatusText:message.model.status]];
         }
     }
     return nil;

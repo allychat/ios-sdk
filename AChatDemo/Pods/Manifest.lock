@@ -1,33 +1,24 @@
 PODS:
-  - AChat (0.0.2)
   - JSQMessagesViewController (7.1.0):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
 
 DEPENDENCIES:
-  - AChat (from `https://github.com/allychat/ios-sdk.git`, branch `develop`)
   - JSQMessagesViewController (from `https://github.com/jessesquires/JSQMessagesViewController.git`,
     branch `develop`)
 
 EXTERNAL SOURCES:
-  AChat:
-    :branch: develop
-    :git: https://github.com/allychat/ios-sdk.git
   JSQMessagesViewController:
     :branch: develop
     :git: https://github.com/jessesquires/JSQMessagesViewController.git
 
 CHECKOUT OPTIONS:
-  AChat:
-    :commit: cdf9ce3d183da2c83a62e08ccecfcca23f5c9f6e
-    :git: https://github.com/allychat/ios-sdk.git
   JSQMessagesViewController:
-    :commit: 91e74b0f7b0059e8f25fb106b76de77d5c6703cf
+    :commit: 9042e961b058059cb37eb46a8264083737b507f3
     :git: https://github.com/jessesquires/JSQMessagesViewController.git
 
 SPEC CHECKSUMS:
-  AChat: d74c666712d7a77957f0cd9e5f082c9f6274f3eb
   JSQMessagesViewController: ca11f86fa68ca70835f05e169df9244147c1dc40
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
 
-COCOAPODS: 0.37.2
+COCOAPODS: 0.38.2

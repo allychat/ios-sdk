@@ -13,4 +13,6 @@
 
 @property(nonatomic, strong)ACMessageModel *model;
 
++(NSString *)getStatusText:(MessageStatus)status;
+
 @end

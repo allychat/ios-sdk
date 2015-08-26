@@ -152,7 +152,7 @@ Without CocoaPods:
 
 ## Questions & Help
 
-There's [a label](https://github.com/jessesquires/JSQMessagesViewController/labels/questions%20&%20help) for that. Before asking a question, see if it has [already been answered](https://github.com/jessesquires/JSQMessagesViewController/issues?q=label%3A%22questions+%26+help%22+is%3Aclosed). **Please only ask questions that are _specific_ to this library.**
+There's [a label](https://github.com/jessesquires/JSQMessagesViewController/labels/questions%20&%20help) for that. Before asking a question, see if it has [already been answered](https://github.com/jessesquires/JSQMessagesViewController/issues?q=label%3A%22questions+%26+help%22+is%3Aclosed). There's also a tag on [StackOverflow](http://stackoverflow.com/questions/tagged/jsqmessagesviewcontroller), which is often the more appropriate place for questions and help. **Please only ask questions that are _specific_ to this library.**
 
 >**NOTE:** Please try to avoid emailing me with questions. I prefer to keep questions and their answers open-source.
 
@@ -172,7 +172,7 @@ Read the fucking docs, [available here][docsLink] via [@CocoaDocs](https://twitt
 
 ## Contribute
 
-Please follow these sweet [contribution guidelines](https://github.com/jessesquires/HowToContribute).
+Please follow these fucking sweet [contribution guidelines](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/CONTRIBUTING.md).
 
 ## Donate
 
