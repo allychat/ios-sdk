@@ -1,0 +1,25 @@
+{
+  "name": "AChat",
+  "version": "0.0.5",
+  "summary": "The AChat Framework.",
+  "license": {
+    "type": "MIT"
+  },
+  "homepage": "https://github.com/allychat/ios-sdk",
+  "authors": {
+    "Alexandr Turyev": "ekklesiarhia@gmail.com"
+  },
+  "platforms": {
+    "ios": "7.0"
+  },
+  "source": {
+    "git": "https://github.com/allychat/ios-sdk.git",
+    "tag": "0.0.5"
+  },
+  "frameworks": "AChat",
+  "libraries": "icucore",
+  "requires_arc": true,
+  "ios": {
+    "vendored_frameworks": "AChat.framework"
+  }
+}

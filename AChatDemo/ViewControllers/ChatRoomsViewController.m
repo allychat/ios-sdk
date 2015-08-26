@@ -48,9 +48,7 @@
     [super viewDidLoad];
     
     //#warning Please input APPLICATION ID and NAME you would like to use
-    [SharedEngine shared].engine = [[ACEngine alloc] initWithURL:[NSURL URLWithString:@"https://my-dev.allychat.ru"]
-                                                           alias:self.alias name:@"MY_DEV_TEST_USER"
-                                                andApplicationId:@"APPLICATION_ID"];
+    [SharedEngine shared].engine = [[ACEngine alloc] initWithURL:[NSURL URLWithString:@"https://my-dev.allychat.ru"] alias:self.alias name:@"MY_DEV_TEST_USER" andApplicationId:@"APPLICATION_ID"];
     /*
      Make your app register for remote notifications
      */

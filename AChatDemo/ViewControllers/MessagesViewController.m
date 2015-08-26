@@ -204,9 +204,11 @@
 -(void)updateMessageStatus:(ACMessageModel *)inputMessage
 {
     [self.messages enumerateObjectsUsingBlock:^(AllyChatMessage *obj, NSUInteger idx, BOOL *stop) {
-        if ([obj.model.client_id isEqualToString:inputMessage.client_id]) {
-            obj.model.status = inputMessage.status;
-            *stop = YES;
+        if (obj.model.client_id) {
+            if ([obj.model.client_id isEqualToString:inputMessage.client_id]) {
+                obj.model.status = inputMessage.status;
+                *stop = YES;
+            }
             if (!inputMessage.fileAttachmentURL)
             {
                 [self.collectionView reloadData];
