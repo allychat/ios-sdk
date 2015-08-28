@@ -6,19 +6,17 @@
 //  Copyright (c) 2015 Octoberry. All rights reserved.
 //
 
-#import <AChat/ACBaseModel.h>
+#import <Foundation/Foundation.h>
 
-@interface ACUserModel : ACBaseModel
+@interface ACUserModel : NSObject <NSCoding, NSCopying>
 
-@property (nonatomic, strong) NSString  *userID;
-@property (nonatomic, strong) NSString  *name;
-@property (nonatomic, strong) NSString  *avatarUrl;
+@property (nonatomic, strong) NSString *senderIdentifier;
+@property (nonatomic, strong) NSString *alias;
+@property (nonatomic, strong) NSString *avatarUrl;
+@property (nonatomic, strong) NSString *name;
 
-@property (nonatomic, strong) NSString  *alias;
-
--(instancetype)initWithUserId:(NSString *)userId
-                         name:(NSString *)name
-                        alias:(NSString *)alias
-                 andAvatarURL:(NSString *)avatarUrl;
++ (instancetype)modelObjectWithDictionary:(NSDictionary *)dict;
+- (instancetype)initWithDictionary:(NSDictionary *)dict;
+- (NSDictionary *)dictionaryRepresentation;
 
 @end

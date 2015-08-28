@@ -31,16 +31,13 @@
 
 -(void)chat:(ACEngine *)engine didUpdateStatusFromStatus:(AChatStatus)oldSstatus toStatus:(AChatStatus)newStatus
 {
-    //NSLog(@"%d - > %d", oldSstatus, newStatus);
-    
+    NSLog(@"%d - > %d", oldSstatus, newStatus);
     if (newStatus == AChatStatusOnline) {
         
         [[SharedEngine shared].engine unreadMessagesForRoomId:self.room.roomID completion:^(NSError *error, NSArray *unreadMessages) {
             for (ACMessageModel *msgObject in unreadMessages) {
-                // if (![self.messages containsObject:msgObject]) {
                 [self addAllyChatMesage:msgObject];
                 [self finishReceivingMessageAnimated:YES];
-                // }
             }
         }];
     }
@@ -49,36 +46,40 @@
 - (void)chat:(ACEngine *)engine didReceiveMessage:(ACMessageModel *)msgObject
 {
     //Check if Message from current Room
-    if ([msgObject.roomID isEqualToString:self.room.roomID])
+    if ([msgObject.room isEqualToString:self.room.roomID])
     {
-        //CHECK IF CURRENT MESSAGE IS INCOME
-        if (msgObject.isOuput)
-        {
-            [self addAllyChatMesage:msgObject];
-            [self finishReceivingMessageAnimated:YES];
-            
-            //Mark it read
-            [[SharedEngine shared].engine readMessage:msgObject.messageID completion:^(NSError *error, bool isComplete) {
-                if (!isComplete) {
-                    NSLog(@"%@", error);
-                }
-            }];
-        }
-        else
-        {
-            [self updateMessageStatus:msgObject];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.collectionView reloadData];
-            });
-            
-        }
+        [self addAllyChatMesage:msgObject];
+        [self finishReceivingMessageAnimated:YES];
+        
+        //Mark it read
+        [[SharedEngine shared].engine readMessage:msgObject.internalBaseClassIdentifier completion:^(NSError *error, bool isComplete) {
+            if (!isComplete) {
+                NSLog(@"%@", error);
+            }
+        }];
     }
     else
     {
         //Show Message from another Room
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:msgObject.roomID message:msgObject.message delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil, nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:msgObject.room message:msgObject.message delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil, nil];
         [alertView show];
     }
+}
+
+-(void)chat:(ACEngine *)engine didUpdateMessage:(ACMessageModel *)message toStatus:(MessageStatus)newStatus
+{
+    NSLog(@"signature: %@ status: %lu", message.clientId, (unsigned long)newStatus);
+    [self.messages enumerateObjectsUsingBlock:^(AllyChatMessage *obj, NSUInteger idx, BOOL *stop) {
+        if (obj.messageModel.clientId && message.clientId) {
+            if ([obj.messageModel.clientId isEqualToString:message.clientId]) {
+                obj.messageModel.status = newStatus;
+                *stop = YES;
+            }
+        }
+    }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.collectionView reloadData];
+    });
 }
 
 -(void)chat:(ACEngine *)engine didConnectChatRoom:(ACRoomModel *)room
@@ -95,12 +96,13 @@
     
     NSString *senderDisplayName = messageModel.sender.name?messageModel.sender.name:messageModel.sender.alias;
     
-    if (messageModel.fileAttachmentURL)
+    if (messageModel.file)
     {
         JSQPhotoMediaItem *item = [JSQPhotoMediaItem new];
-        message = [[AllyChatMessage alloc] initWithSenderId:messageModel.sender.userID senderDisplayName:senderDisplayName date:messageModel.sentDate media:item];
+        message = [[AllyChatMessage alloc] initWithSenderId:messageModel.sender.senderIdentifier senderDisplayName:senderDisplayName date:messageModel.createdAt media:item];
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:messageModel.fileAttachmentURL]];
+            NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:messageModel.file]];
             item.image = [UIImage imageWithData:data];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.collectionView reloadData];
@@ -109,9 +111,12 @@
     }
     else
     {
-        message = [[AllyChatMessage alloc] initWithSenderId:messageModel.sender.userID senderDisplayName:senderDisplayName date:messageModel.sentDate text:messageModel.message];
+        message = [[AllyChatMessage alloc] initWithSenderId:messageModel.sender.senderIdentifier
+                                          senderDisplayName:senderDisplayName
+                                                       date:messageModel.createdAt
+                                                       text:messageModel.message];
     }
-    message.model = messageModel;
+    message.messageModel = messageModel;
     [self.messages addObject:message];
 }
 
@@ -167,6 +172,7 @@
             }
             else
             {
+                NSLog(@"signature: %@ status: %lu", message.clientId, (unsigned long)STATUS_NEW);
                 [JSQSystemSoundPlayer jsq_playMessageSentSound];
                 [self addAllyChatMesage:message];
                 [self finishSendingMessageAnimated:YES];
@@ -182,6 +188,7 @@
             }
             else
             {
+                NSLog(@"signature: %@ status: %lu", message.clientId, (unsigned long)STATUS_NEW);
                 [JSQSystemSoundPlayer jsq_playMessageSentSound];
                 [self addAllyChatMesage:message];
                 [self finishSendingMessageAnimated:YES];
@@ -192,31 +199,18 @@
 
 -(id<JSQMessageAvatarImageDataSource>)getSenderAvatarImage:(AllyChatMessage *)message
 {
-    if (self.avatars[message.model.sender.userID] == nil)
+    if (self.avatars[message.senderId] == nil)
     {
         //Load Avatar Image
-        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.model.sender.avatarUrl]]];
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.messageModel.sender.avatarUrl]]];
         if (image) {
             JSQMessagesAvatarImage *wozImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:image diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
-            self.avatars[message.model.sender.userID] = wozImage;
+            self.avatars[message.senderId] = wozImage;
             return wozImage;
         }
         return nil;
     }
-    else return (self.avatars[message.model.sender.userID]);
-}
-
--(void)updateMessageStatus:(ACMessageModel *)inputMessage
-{
-    NSLog(@"status: %lu", (unsigned long)inputMessage.status);
-    [self.messages enumerateObjectsUsingBlock:^(AllyChatMessage *obj, NSUInteger idx, BOOL *stop) {
-        if (obj.model.client_id) {
-            if ([obj.model.client_id isEqualToString:inputMessage.client_id]) {
-                obj.model.status = inputMessage.status;
-                *stop = YES;
-            }
-        }
-    }];
+    else return (self.avatars[message.senderId]);
 }
 
 #pragma mark -
@@ -239,7 +233,7 @@
     /**
      *  Set properties correspond to determine which messages are incoming or outgoing.
      */
-    self.senderId = [SharedEngine shared].engine.userModel.userID;
+    self.senderId = [SharedEngine shared].engine.userModel.senderIdentifier;
     self.senderDisplayName = [SharedEngine shared].engine.userModel.alias;
     
     /**
@@ -358,12 +352,12 @@
         if (indexPath.item > 0)
         {
             JSQMessage *previous = self.messages[indexPath.item-1];
-            if ([previous.senderId isEqualToString:message.model.sender.userID])
+            if ([previous.senderId isEqualToString:message.senderId])
             {
                 return nil;
             }
         }
-        return [[NSAttributedString alloc] initWithString:(message.model.sender.name)?message.model.sender.name:message.model.sender.alias];
+        return [[NSAttributedString alloc] initWithString:(message.senderDisplayName)];
     }
     else return nil;
 }
@@ -373,8 +367,8 @@
     if ([self outgoing:self.messages[indexPath.item]])
     {
         AllyChatMessage *message = [self.messages objectAtIndex:indexPath.item];
-        if (message.model.status) {
-            return [[NSAttributedString alloc] initWithString:[AllyChatMessage getStatusText:message.model.status]];
+        if (message.messageModel.status) {
+            return [[NSAttributedString alloc] initWithString:[self getStatusText:message.messageModel.status]];
         }
     }
     return nil;
@@ -457,7 +451,7 @@
                 header:(JSQMessagesLoadEarlierHeaderView *)headerView didTapLoadEarlierMessagesButton:(UIButton *)sender
 {
     AllyChatMessage *theOldestMessage = self.messages.firstObject;
-    [self loadEarlierMessages:MESSAGES_COUNT forLastMessage:theOldestMessage.model.messageID];
+    [self loadEarlierMessages:MESSAGES_COUNT forLastMessage:theOldestMessage.messageModel.internalBaseClassIdentifier];
 }
 
 #pragma mark - ImagePicker
@@ -496,6 +490,24 @@
 - (BOOL)outgoing:(JSQMessage *)message
 {
     return ([message.senderId isEqualToString:self.senderId] == YES);
+}
+
+-(NSString *)getStatusText:(MessageStatus)status
+{
+    switch (status) {
+        case STATUS_NEW:
+            return @"New";
+        case STATUS_SENDING:
+            return @"Sending...";
+        case STATUS_SENT:
+            return @"Delivered";
+        case STATUS_FAILED:
+            return @"Failed!";
+        case STATUS_RESENDING:
+            return @"Resending...";
+        default:
+            return @"...";
+    }
 }
 
 @end

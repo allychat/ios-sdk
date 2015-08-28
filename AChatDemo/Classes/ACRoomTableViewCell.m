@@ -34,13 +34,13 @@
             self.subTitle.text = room.lastMessage.message;
             
             //If last message made by current user - mark it
-            if ([room.lastMessage.senderID isEqualToString:[SharedEngine shared].engine.userModel.userID])
+            if ([room.lastMessage.sender.senderIdentifier isEqualToString:[SharedEngine shared].engine.userModel.senderIdentifier])
             {
                 self.subTitle.text = [NSString stringWithFormat:@"You: %@", self.subTitle.text];
             }
             
             // Set Time Elapsed till last message
-            NSTimeInterval seconds = [[NSDate date] timeIntervalSinceDate:_room.lastMessage.sentDate];
+            NSTimeInterval seconds = [[NSDate date] timeIntervalSinceDate:_room.lastMessage.createdAt];
             self.rightDetail.text = TimeElapsed(seconds);
         }
         else
@@ -63,7 +63,7 @@
             [[SharedEngine shared].engine usersWithIDs:room.users completion:^(NSError *error, NSArray *users) {
                 if (users) {
                     [users enumerateObjectsUsingBlock:^(ACUserModel *user, NSUInteger idx, BOOL *stop) {
-                        if (![user.userID isEqualToString:[SharedEngine shared].engine.userModel.userID]) {
+                        if (![user.senderIdentifier isEqualToString:[SharedEngine shared].engine.userModel.senderIdentifier]) {
                             self.title.text = user.alias;
                             self.avatarView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:user.avatarUrl]]];
                             *stop = true;
