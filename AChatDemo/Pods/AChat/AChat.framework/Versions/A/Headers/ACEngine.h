@@ -27,11 +27,17 @@ typedef NS_ENUM(NSInteger, AChatStatus) {
 };
 
 @class ACEngine;
+
 @protocol AChatDelegate <NSObject>
+
 @optional
 
 - (void)chat:(ACEngine *)engine didUpdateStatusFromStatus:(AChatStatus)oldSstatus toStatus:(AChatStatus)newStatus;
+
 - (void)chat:(ACEngine *)engine didReceiveMessage:(ACMessageModel *)message;
+
+- (void)chat:(ACEngine *)engine didUpdateMessage:(ACMessageModel*)message toStatus:(MessageStatus)newStatus;
+
 - (void)chat:(ACEngine *)engine didConnectChatRoom:(ACRoomModel *)room;
 
 @end
@@ -113,6 +119,9 @@ withExternalTokenCompletion:(NSString* (^)(void))externalTokenCompletion;
 - (void)sendTextMessage:(NSString *)text
                  roomId:(NSString *)roomID
              completion:(void(^)(NSError *error, ACMessageModel *message))completion;
+
+- (void)resendMessage:(ACMessageModel *)message
+             completion:(void(^)(NSError *error))completion;
 
 - (void)readMessage:(NSString *)messageID
          completion:(void(^)(NSError *error, bool isComplete))completion;
