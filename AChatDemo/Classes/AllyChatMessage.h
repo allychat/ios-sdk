@@ -11,8 +11,6 @@
 
 @interface AllyChatMessage : JSQMessage
 
-@property(nonatomic, strong)ACMessageModel *model;
-
-+(NSString *)getStatusText:(MessageStatus)status;
+@property(nonatomic, strong) ACMessageModel *messageModel;
 
 @end

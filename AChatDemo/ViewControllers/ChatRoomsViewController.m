@@ -48,9 +48,7 @@
     [super viewDidLoad];
     
     //#warning Please input APPLICATION ID and NAME you would like to use
-    [SharedEngine shared].engine = [[ACEngine alloc] initWithURL:[NSURL URLWithString:@"https://my-dev.allychat.ru"]
-                                                           alias:self.alias name:@"MY_DEV_TEST_USER"
-                                                andApplicationId:@"APPLICATION_ID"];
+    [SharedEngine shared].engine = [[ACEngine alloc] initWithURL:[NSURL URLWithString:@"https://my-dev.allychat.ru"] alias:self.alias name:@"MY_DEV_TEST_USER" andApplicationId:@"APPLICATION_ID"];
     /*
      Make your app register for remote notifications
      */
@@ -106,10 +104,10 @@
         //Try to get data about the user from this alias
         [[SharedEngine shared].engine userWithAlias:opponentAlias.text completion:^(NSError *error, ACUserModel *user) {
             if (user && error==nil) {
-                NSLog(@"Opponent userId: %@\n", user.userID);
+                NSLog(@"Opponent userId: %@\n", user.senderIdentifier);
                 
                 //Now we have userId and can create a chat(room) with this user
-                [[SharedEngine shared].engine createRoomWithOpponent:user.userID completion:^(NSError *error, ACRoomModel *room) {
+                [[SharedEngine shared].engine createRoomWithOpponent:user.senderIdentifier completion:^(NSError *error, ACRoomModel *room) {
                     if (room && error == nil) {
                         NSLog(@"RoomId: %@\n", room.roomID);
                         

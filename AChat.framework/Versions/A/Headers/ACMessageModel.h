@@ -7,7 +7,7 @@
 //  Copyright (c) 2015 Octoberry. All rights reserved.
 //
 
-#import <AChat/ACBaseModel.h>
+#import <Foundation/Foundation.h>
 #import "ACUserModel.h"
 
 typedef NS_ENUM(NSUInteger, MessageStatus) {
@@ -18,50 +18,29 @@ typedef NS_ENUM(NSUInteger, MessageStatus) {
     STATUS_FAILED
 };
 
-@interface ACMessageModel : ACBaseModel
+@interface ACMessageModel : NSObject<NSCoding, NSCopying>
 
-@property (nonatomic, strong) NSString  *messageID;
 
-@property (nonatomic, strong) NSString *senderID;
+
 
 @property (nonatomic, strong) ACUserModel *sender;
-
-@property (nonatomic, strong) NSString  *roomID;
-
-@property (nonatomic, strong) NSString  *message;
-
+@property (nonatomic, strong) NSString *room;
+@property (nonatomic, strong) NSString *internalBaseClassIdentifier;
+@property (nonatomic, strong) NSDate *createdAt;
+@property (nonatomic, strong) NSString *file;
+@property (nonatomic, strong) NSString *message;
+@property (nonatomic, assign) BOOL isHidden;
 /*
-    Loaded image url
+ Signature of message
  */
-@property (nonatomic, strong) NSString  *fileAttachmentURL;
-
-@property (nonatomic, strong) NSDate    *sentDate;
-
+@property (nonatomic, strong) NSString *clientId;
 @property (nonatomic, strong) NSString *issue;
 
-/*
-    Signature of message
- */
-@property (nonatomic, retain) NSString *client_id;
+@property(nonatomic, assign) MessageStatus status;
 
-/*
-    Sending status
- */
-@property (atomic,assign) MessageStatus status;
-
-/*
- Sending status
- */
-@property (atomic,assign) BOOL isOuput;
-
-
-
--(instancetype)initSenderId:(NSString *)userId
-                     roomId:(NSString *)roomId
-                    message:(NSString *)message
-                   clientId:(NSString *)clientId
-          fileAttachmentURL:(NSString *)fileAttachmentURL
-                andSentDate:(NSDate *)sentDate;
++ (instancetype)modelObjectWithDictionary:(NSDictionary *)dict;
+- (instancetype)initWithDictionary:(NSDictionary *)dict;
+- (NSDictionary *)dictionaryRepresentation;
 
 
 
