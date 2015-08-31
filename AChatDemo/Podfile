@@ -3,6 +3,5 @@ platform :ios, '7.0'
 
  target 'allychat.demo' do
 	pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController.git', :branch => 'develop'
-    pod 'AChat', :git => 'https://github.com/allychat/ios-sdk.git'
 end
 
