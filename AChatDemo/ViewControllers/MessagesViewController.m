@@ -132,6 +132,8 @@
                 {
                     [self addAllyChatMesage:messageModel];
                 }
+                [self.messages sortUsingDescriptors:@[ [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]]];
+                [self.collectionView reloadData];
                 [self finishReceivingMessageAnimated:YES];
             }
         }
