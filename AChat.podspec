@@ -1,12 +1,12 @@
 Pod::Spec.new do |s|
   s.name         = "AChat"
-  s.version      = "0.0.7"
+  s.version      = "0.0.8"
   s.summary      = "The AChat Framework."
   s.license      = { :type => 'MIT' }
   s.homepage     = 'https://github.com/allychat/ios-sdk'
   s.author       = { "Alexandr Turyev" => "ekklesiarhia@gmail.com"}
   s.platform     = :ios, "7.0"
-  s.source       = { :git => "https://github.com/allychat/ios-sdk.git", :tag => "0.0.7" }
+  s.source       = { :git => "https://github.com/allychat/ios-sdk.git", :tag => "0.0.8" }
   #s.source_files  = "AChatDemo/**/*.{h,m}"
   #s.exclude_files = "AChatDemo/Pods/**/*.{h,m}"
   # s.public_header_files = "Classes/**/*.h"
