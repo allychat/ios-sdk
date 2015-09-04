@@ -25,15 +25,14 @@ typedef NS_ENUM(NSUInteger, MessageStatus) {
 
 @property (nonatomic, strong) ACUserModel *sender;
 @property (nonatomic, strong) NSString *room;
-@property (nonatomic, strong) NSString *internalBaseClassIdentifier;
+
 @property (nonatomic, strong) NSDate *createdAt;
 @property (nonatomic, strong) NSString *file;
 @property (nonatomic, strong) NSString *message;
 @property (nonatomic, assign) BOOL isHidden;
-/*
- Signature of message
- */
-@property (nonatomic, strong) NSString *clientId;
+
+@property (nonatomic, strong) NSString *messageId;
+
 @property (nonatomic, strong) NSString *issue;
 
 @property(nonatomic, assign) MessageStatus status;

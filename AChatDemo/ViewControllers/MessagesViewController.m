@@ -36,6 +36,12 @@
         
         [[SharedEngine shared].engine unreadMessagesForRoomId:self.room.roomID completion:^(NSError *error, NSArray *unreadMessages) {
             for (ACMessageModel *msgObject in unreadMessages) {
+                //Mark it read
+                [[SharedEngine shared].engine readMessage:msgObject.messageId completion:^(NSError *error, bool isComplete) {
+                    if (!isComplete) {
+                        NSLog(@"%@", error);
+                    }
+                }];
                 [self addAllyChatMesage:msgObject];
                 [self finishReceivingMessageAnimated:YES];
             }
@@ -51,8 +57,10 @@
         [self addAllyChatMesage:msgObject];
         [self finishReceivingMessageAnimated:YES];
         
+        [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
+        
         //Mark it read
-        [[SharedEngine shared].engine readMessage:msgObject.internalBaseClassIdentifier completion:^(NSError *error, bool isComplete) {
+        [[SharedEngine shared].engine readMessage:msgObject.messageId completion:^(NSError *error, bool isComplete) {
             if (!isComplete) {
                 NSLog(@"%@", error);
             }
@@ -63,15 +71,16 @@
         //Show Message from another Room
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:msgObject.room message:msgObject.message delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil, nil];
         [alertView show];
+        [JSQSystemSoundPlayer jsq_playMessageReceivedAlert];
     }
 }
 
 -(void)chat:(ACEngine *)engine didUpdateMessage:(ACMessageModel *)message toStatus:(MessageStatus)newStatus
 {
-    NSLog(@"signature: %@ status: %lu", message.clientId, (unsigned long)newStatus);
+    NSLog(@"signature: %@ status: %lu", message.messageId, (unsigned long)newStatus);
     [self.messages enumerateObjectsUsingBlock:^(AllyChatMessage *obj, NSUInteger idx, BOOL *stop) {
-        if (obj.messageModel.clientId && message.clientId) {
-            if ([obj.messageModel.clientId isEqualToString:message.clientId]) {
+        if (obj.messageModel.messageId && message.messageId) {
+            if ([obj.messageModel.messageId isEqual:message.messageId]) {
                 obj.messageModel.status = newStatus;
                 *stop = YES;
             }
@@ -121,6 +130,24 @@
 }
 
 /**
+ *  Load all failed Messages for the current Room
+ */
+-(void)loadFailedMessages
+{
+    [[SharedEngine shared].engine failedMessagesForRoomId:self.room.roomID completion:^(NSError *error, NSArray *failedMessages) {
+        if (failedMessages && error == nil) {
+            if (failedMessages.count>0) {
+                for (ACMessageModel *messageModel in failedMessages) {
+                    [self addAllyChatMesage:messageModel];
+                }
+                [self.messages sortUsingDescriptors:@[ [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]]];
+                [self finishReceivingMessageAnimated:YES];
+            }
+        }
+    }];
+}
+
+/**
  *  Load last Messages of the current Room
  */
 -(void)loadLastMessages:(NSUInteger)count
@@ -133,7 +160,6 @@
                     [self addAllyChatMesage:messageModel];
                 }
                 [self.messages sortUsingDescriptors:@[ [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]]];
-                [self.collectionView reloadData];
                 [self finishReceivingMessageAnimated:YES];
             }
         }
@@ -174,7 +200,7 @@
             }
             else
             {
-                NSLog(@"signature: %@ status: %lu", message.clientId, (unsigned long)STATUS_NEW);
+                NSLog(@"signature: %@ status: %lu", message.messageId, (unsigned long)STATUS_NEW);
                 [JSQSystemSoundPlayer jsq_playMessageSentSound];
                 [self addAllyChatMesage:message];
                 [self finishSendingMessageAnimated:YES];
@@ -190,7 +216,7 @@
             }
             else
             {
-                NSLog(@"signature: %@ status: %lu", message.clientId, (unsigned long)STATUS_NEW);
+                NSLog(@"signature: %@ status: %lu", message.messageId, (unsigned long)STATUS_NEW);
                 [JSQSystemSoundPlayer jsq_playMessageSentSound];
                 [self addAllyChatMesage:message];
                 [self finishSendingMessageAnimated:YES];
@@ -250,6 +276,8 @@
     [super viewDidLoad];
     
     self.messages = [NSMutableArray array];
+    
+    [self loadFailedMessages];
     
     [self loadLastMessages:MESSAGES_COUNT];
     
@@ -453,7 +481,7 @@
                 header:(JSQMessagesLoadEarlierHeaderView *)headerView didTapLoadEarlierMessagesButton:(UIButton *)sender
 {
     AllyChatMessage *theOldestMessage = self.messages.firstObject;
-    [self loadEarlierMessages:MESSAGES_COUNT forLastMessage:theOldestMessage.messageModel.internalBaseClassIdentifier];
+    [self loadEarlierMessages:MESSAGES_COUNT forLastMessage:theOldestMessage.messageModel.messageId];
 }
 
 #pragma mark - ImagePicker

@@ -120,7 +120,7 @@ withExternalTokenCompletion:(NSString* (^)(void))externalTokenCompletion;
                  roomId:(NSString *)roomID
              completion:(void(^)(NSError *error, ACMessageModel *message))completion;
 
-- (void)resendMessage:(ACMessageModel *)message
+- (void)resendMessage:(NSString *)messageId
              completion:(void(^)(NSError *error))completion;
 
 - (void)readMessage:(NSString *)messageID
@@ -136,6 +136,9 @@ withExternalTokenCompletion:(NSString* (^)(void))externalTokenCompletion;
 
 - (void)unreadMessagesForRoomId:(NSString *)roomId
                      completion:(void(^)(NSError *error, NSArray *unreadMessages))completion;
+
+- (void)failedMessagesForRoomId:(NSString *)roomId
+                     completion:(void(^)(NSError *error, NSArray *failedMessages))completion;
 
 - (void)historyForRoomId:(NSString *)roomID
                    limit:(NSNumber*)limit
