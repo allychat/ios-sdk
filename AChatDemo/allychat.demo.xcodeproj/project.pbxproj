@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1B5E502E1B905699006E522C /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B5E502D1B905699006E522C /* libicucore.dylib */; };
-		1B826B431B9941A80051F8B0 /* AChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B826B421B9941A80051F8B0 /* AChat.framework */; };
+		1B826B451B99BE5A0051F8B0 /* AChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B826B441B99BE5A0051F8B0 /* AChat.framework */; };
 		1BBA602B1B5FEF44007391CF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BBA602A1B5FEF44007391CF /* AppDelegate.m */; };
 		1BBA602E1B5FEF54007391CF /* SharedEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BBA602D1B5FEF54007391CF /* SharedEngine.m */; };
 		1BBA60311B5FEF65007391CF /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BBA60301B5FEF65007391CF /* LoginViewController.m */; };
@@ -27,7 +27,7 @@
 /* Begin PBXFileReference section */
 		1B0298561B55D6460078C038 /* allychat.demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = allychat.demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B5E502D1B905699006E522C /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
-		1B826B421B9941A80051F8B0 /* AChat.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AChat.framework; sourceTree = "<group>"; };
+		1B826B441B99BE5A0051F8B0 /* AChat.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AChat.framework; sourceTree = "<group>"; };
 		1BBA60291B5FEF44007391CF /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Classes/AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		1BBA602A1B5FEF44007391CF /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Classes/AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		1BBA602C1B5FEF54007391CF /* SharedEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SharedEngine.h; path = Utils/SharedEngine.h; sourceTree = SOURCE_ROOT; };
@@ -57,7 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B826B431B9941A80051F8B0 /* AChat.framework in Frameworks */,
+				1B826B451B99BE5A0051F8B0 /* AChat.framework in Frameworks */,
 				1B5E502E1B905699006E522C /* libicucore.dylib in Frameworks */,
 				550A195716DFD01A13547439 /* libPods-allychat.demo.a in Frameworks */,
 			);
@@ -178,7 +178,7 @@
 		C02F9307F9ED7D2E84518E21 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1B826B421B9941A80051F8B0 /* AChat.framework */,
+				1B826B441B99BE5A0051F8B0 /* AChat.framework */,
 				1B5E502D1B905699006E522C /* libicucore.dylib */,
 				CA9758BB1B37F23D518B67D9 /* libPods-allychat.demo.a */,
 			);
