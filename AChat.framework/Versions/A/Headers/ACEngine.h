@@ -89,10 +89,6 @@ withExternalTokenCompletion:(NSString* (^)(void))externalTokenCompletion;
 - (void)updateAvatarWithURLString:(NSString *)urlString
                        completion:(void(^)(NSError *error))completion;
 
-- (void)connect;
-
-- (void)disconnect;
-
 #pragma mark - Rooms
 /*
     Get the Room with Support Team
