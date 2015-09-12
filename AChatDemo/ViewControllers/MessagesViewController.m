@@ -81,7 +81,20 @@
     [self.messages enumerateObjectsUsingBlock:^(AllyChatMessage *obj, NSUInteger idx, BOOL *stop) {
         if (obj.messageModel.messageId && message.messageId) {
             if ([obj.messageModel.messageId isEqual:message.messageId]) {
-                obj.messageModel.status = newStatus;
+                
+                //Check if updated message has a picture
+                if (newStatus == STATUS_SENT && obj.messageModel.file)
+                {
+                    if (obj.messageModel.file.length>0) {
+                        [self.messages removeObject:obj];
+                        [self addAllyChatMesage:message];
+                    }
+                }
+                else
+                {
+                    obj.messageModel.status = newStatus;
+                }
+                
                 *stop = YES;
             }
         }
@@ -102,7 +115,6 @@
 -(void)addAllyChatMesage:(ACMessageModel *)messageModel
 {
     AllyChatMessage *message = nil;
-    
     NSString *senderDisplayName = messageModel.sender.name?messageModel.sender.name:messageModel.sender.alias;
     
     if (messageModel.file)
@@ -110,13 +122,17 @@
         JSQPhotoMediaItem *item = [JSQPhotoMediaItem new];
         message = [[AllyChatMessage alloc] initWithSenderId:messageModel.sender.senderIdentifier senderDisplayName:senderDisplayName date:messageModel.createdAt media:item];
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:messageModel.file]];
-            item.image = [UIImage imageWithData:data];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.collectionView reloadData];
+        if (messageModel.file.length>0) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:messageModel.file]];
+                item.image = [UIImage imageWithData:data];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    message.messageModel.status = STATUS_SENT;
+                    [self.collectionView reloadData];
+                });
             });
-        });
+        }
+        
     }
     else
     {
@@ -202,6 +218,7 @@
             {
                 NSLog(@"signature: %@ status: %lu", message.messageId, (unsigned long)STATUS_NEW);
                 [JSQSystemSoundPlayer jsq_playMessageSentSound];
+                
                 [self addAllyChatMesage:message];
                 [self finishSendingMessageAnimated:YES];
             }
