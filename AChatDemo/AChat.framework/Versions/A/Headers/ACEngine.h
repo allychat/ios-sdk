@@ -140,6 +140,20 @@ withExternalTokenCompletion:(NSString* (^)(void))externalTokenCompletion;
 - (void)failedMessagesForRoomId:(NSString *)roomId
                      completion:(void(^)(NSError *error, NSArray *failedMessages))completion;
 
+/*
+    Returns the count of all messages for room by roomId
+ */
+- (void)countMessagesForRoomId:(NSString *)roomId
+                    completion:(void (^)(NSError *error, NSUInteger count))completion;
+
+/*
+    Get the array of messages for by roomId with offset and limit
+ */
+- (void)getMessagesForRoomId:(NSString *)roomId
+                      offset:(NSInteger)offset
+                       limit:(NSInteger)limit
+                  completion:(void(^)(NSError *error, NSArray *messages))completion;
+
 - (void)historyForRoomId:(NSString *)roomID
                    limit:(NSNumber*)limit
            lastMessageID:(NSString *)messageID
