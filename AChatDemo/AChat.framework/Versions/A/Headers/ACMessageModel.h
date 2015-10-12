@@ -20,9 +20,6 @@ typedef NS_ENUM(NSUInteger, MessageStatus) {
 
 @interface ACMessageModel : NSObject<NSCoding, NSCopying>
 
-
-
-
 @property (nonatomic, strong) ACUserModel *sender;
 @property (nonatomic, strong) NSString *room;
 
