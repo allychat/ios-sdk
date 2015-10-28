@@ -7,8 +7,7 @@ Pod::Spec.new do |s|
   s.author       = { "Alexandr Turyev" => "ekklesiarhia@gmail.com"}
   s.platform     = :ios, "7.0"
   s.source       = { :git => "https://github.com/allychat/ios-sdk.git", :tag => "2.0" }
-  s.framework  = "AChat"
-  s.library   = "icucore"
+  s.framework  = "AllychatSDK"
   s.requires_arc = true
   s.ios.vendored_frameworks = 'AllychatSDK.framework'
   s.dependency "AFNetworking"
