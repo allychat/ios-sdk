@@ -1,24 +1,39 @@
 PODS:
-  - JSQMessagesViewController (7.1.0):
+  - AFNetworking (2.6.1):
+    - AFNetworking/NSURLConnection (= 2.6.1)
+    - AFNetworking/NSURLSession (= 2.6.1)
+    - AFNetworking/Reachability (= 2.6.1)
+    - AFNetworking/Security (= 2.6.1)
+    - AFNetworking/Serialization (= 2.6.1)
+    - AFNetworking/UIKit (= 2.6.1)
+  - AFNetworking/NSURLConnection (2.6.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.6.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.6.1)
+  - AFNetworking/Security (2.6.1)
+  - AFNetworking/Serialization (2.6.1)
+  - AFNetworking/UIKit (2.6.1):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - JSQMessagesViewController (7.2.0):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
+  - SocketRocket (0.4.1)
 
 DEPENDENCIES:
-  - JSQMessagesViewController (from `https://github.com/jessesquires/JSQMessagesViewController.git`,
-    branch `develop`)
-
-EXTERNAL SOURCES:
-  JSQMessagesViewController:
-    :branch: develop
-    :git: https://github.com/jessesquires/JSQMessagesViewController.git
-
-CHECKOUT OPTIONS:
-  JSQMessagesViewController:
-    :commit: 9042e961b058059cb37eb46a8264083737b507f3
-    :git: https://github.com/jessesquires/JSQMessagesViewController.git
+  - AFNetworking
+  - JSQMessagesViewController
+  - SocketRocket
 
 SPEC CHECKSUMS:
-  JSQMessagesViewController: ca11f86fa68ca70835f05e169df9244147c1dc40
+  AFNetworking: 8e4e60500beb8bec644cf575beee72990a76d399
+  JSQMessagesViewController: 73cab48aa92fc2d512f3b6724f3425cc47a19eb5
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
+  SocketRocket: ee0b5c34182d37bb4f1f8d628bbe737718126daa
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0
