@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[ACRoomTableViewCell setRoom:]:ACRoomTableViewCell.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[NSDate dateWithTimeIntervalSince1970:_room.lastMessage.createdAt]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[LoginViewController shouldPerformSegueWithIdentifier:sender:]:LoginViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[AllychatSDK instance].userIdentity">
+            </PersistentString>
+            <PersistentString
+               value = "_didFinishExecutingBlock">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
