@@ -46,6 +46,7 @@
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
     if (self.loginField.text.length > 0) {
         if (!_didFinishExecutingBlock) {
+            
             [AllychatSDK instance].userIdentity = [[ACUser alloc] initWithAlias:self.loginField.text];
             [AllychatSDK registerUserIdentity:^(ACUser *userModel) {
                 if (userModel) {

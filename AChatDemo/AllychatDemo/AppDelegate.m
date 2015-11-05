@@ -20,7 +20,8 @@
     #warning Please input APPLICATION ID and URL
     
 //    [AllychatSDK initWithAppId:@"mobile" andUrl:@"https://my-dev.allychat.ru"];
-    [AllychatSDK initWithAppId:@"sense" andUrl:@"https://alfa-dev.allychat.ru"];
+//    [AllychatSDK initWithAppId:@"sense" andUrl:@"https://alfa-dev.allychat.ru"];
+    [AllychatSDK initWithAppId:@"app" andUrl:@"https://corner.magneta.io"];
     /*
      Make your app register for remote notifications
      */

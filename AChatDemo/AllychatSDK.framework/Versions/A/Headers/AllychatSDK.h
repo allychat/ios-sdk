@@ -57,7 +57,7 @@ typedef NS_ENUM(NSInteger, AChatStatus) {
 + (void)connectToChatWithSupport:(void(^)(ACRoom *supportRoom))success
                          failure:(void (^)(NSError *error))failure;
 
-+ (void)connectToChat:(void(^)(ACRoom *chatRoom))success
++ (void)connectToChat:(void(^)(BOOL isComplete))success
               failure:(void (^)(NSError *error))failure;
 
 + (void)disconnectFromChat;
@@ -84,6 +84,10 @@ typedef NS_ENUM(NSInteger, AChatStatus) {
                           success:(void(^)(NSArray *messages))success
                           failure:(void (^)(NSError *error))failure;
 
++ (void)unreadMessagesForRoom:(ACRoom *)room
+                      success:(void(^)(NSArray *messages))success
+                      failure:(void (^)(NSError *error))failure;
+
 #pragma mark - History With Support
 
 + (void)countMessagesWithSupport:(void(^)(NSUInteger count))success
@@ -94,11 +98,7 @@ typedef NS_ENUM(NSInteger, AChatStatus) {
                              success:(void(^)(NSArray *messages))success
                              failure:(void (^)(NSError *error))failure;
 
-
 /*
- - (void)unreadMessagesFromSupport:(void(^)(NSArray *unreadMessages))success
- failure:(void (^)(NSError *error))failure;
- 
  - (void)failedMessages:(void(^)(NSArray *failedMessages))success
  failure:(void (^)(NSError *error))failure;
  
@@ -135,6 +135,10 @@ typedef NS_ENUM(NSInteger, AChatStatus) {
 #pragma mark - Common Sending Methods
 
 + (void)resendMessage:(ACMessage *)message
+              failure:(void (^)(NSError *error))failure;
+
++ (void)resendMessage:(ACMessage *)messageObj
+         withProgress:(void(^)(CGFloat progress))progress
               failure:(void (^)(NSError *error))failure;
 
 + (void)setReadForMessage:(ACMessage *)message

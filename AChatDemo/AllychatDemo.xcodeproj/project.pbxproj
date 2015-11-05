@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		07D938FCDAB4FB66B63B5C57 /* libPods-AllychatDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DEC3ADDD89AA4D5B505F9227 /* libPods-AllychatDemo.a */; };
+		1B68AD341BEBD71C00FAA28F /* AllychatSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B68AD331BEBD71C00FAA28F /* AllychatSDK.framework */; };
 		1B6D19981BDD4943000E32D4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6D19971BDD4943000E32D4 /* main.m */; };
 		1B6D199B1BDD4943000E32D4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6D199A1BDD4943000E32D4 /* AppDelegate.m */; };
 		1B6D19A11BDD4943000E32D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B6D199F1BDD4943000E32D4 /* Main.storyboard */; };
@@ -18,11 +19,11 @@
 		1B9999B11BDDCAD900CC442B /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B9999AE1BDDCAD900CC442B /* MessagesViewController.m */; };
 		1B9999B61BDDCAF900CC442B /* ACRoomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B9999B31BDDCAF900CC442B /* ACRoomTableViewCell.m */; };
 		1B9999B71BDDCAF900CC442B /* AllyChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B9999B51BDDCAF900CC442B /* AllyChatMessage.m */; };
-		1BCEA8FD1BE121850052B063 /* AllychatSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BCEA8FC1BE121850052B063 /* AllychatSDK.framework */; };
 		FA0C73A81BDFBAE20057CB7D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0C73A71BDFBAE10057CB7D /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B68AD331BEBD71C00FAA28F /* AllychatSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AllychatSDK.framework; sourceTree = "<group>"; };
 		1B6D19931BDD4942000E32D4 /* AllychatDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AllychatDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B6D19971BDD4943000E32D4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1B6D19991BDD4943000E32D4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -42,7 +43,6 @@
 		1B9999B41BDDCAF900CC442B /* AllyChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllyChatMessage.h; sourceTree = "<group>"; };
 		1B9999B51BDDCAF900CC442B /* AllyChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllyChatMessage.m; sourceTree = "<group>"; };
 		1B9999BD1BDDCC0B00CC442B /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = ../PrefixHeader.pch; sourceTree = "<group>"; };
-		1BCEA8FC1BE121850052B063 /* AllychatSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AllychatSDK.framework; sourceTree = "<group>"; };
 		870645A364CE88906CE2C80A /* Pods-AllychatDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllychatDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-AllychatDemo/Pods-AllychatDemo.release.xcconfig"; sourceTree = "<group>"; };
 		C46DE51C45F549D10C8CD731 /* Pods-AllychatDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllychatDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AllychatDemo/Pods-AllychatDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		DEC3ADDD89AA4D5B505F9227 /* libPods-AllychatDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AllychatDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,7 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BCEA8FD1BE121850052B063 /* AllychatSDK.framework in Frameworks */,
+				1B68AD341BEBD71C00FAA28F /* AllychatSDK.framework in Frameworks */,
 				FA0C73A81BDFBAE20057CB7D /* Foundation.framework in Frameworks */,
 				07D938FCDAB4FB66B63B5C57 /* libPods-AllychatDemo.a in Frameworks */,
 			);
@@ -167,7 +167,7 @@
 		3C8659EA32288E2EAA7A8379 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1BCEA8FC1BE121850052B063 /* AllychatSDK.framework */,
+				1B68AD331BEBD71C00FAA28F /* AllychatSDK.framework */,
 				FA0C73A71BDFBAE10057CB7D /* Foundation.framework */,
 				DEC3ADDD89AA4D5B505F9227 /* libPods-AllychatDemo.a */,
 			);

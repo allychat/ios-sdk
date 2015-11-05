@@ -3,6 +3,30 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[ACWebSocketServiceProvider connect:]:ACWebSocketServiceProvider.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.connectionStatus ">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__37+[AllychatSDK sendACMessage:failure:]_block_invoke:AllychatSDK.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "syncServiceInstance-&gt;_webSocketProvider.connectionStatus">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[MessagesViewController customAction:]:MessagesViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "indPath.item">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[ACRoomTableViewCell setRoom:]:ACRoomTableViewCell.m">
          <PersistentStrings>
             <PersistentString

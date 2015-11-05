@@ -29,7 +29,6 @@
     [self.view addSubview:indicatorView];
     [indicatorView startAnimating];
     
-    [AllychatSDK disconnectFromChat];    
     [AllychatSDK rooms:^(NSArray *rooms) {
         
         [indicatorView stopAnimating];
@@ -122,7 +121,7 @@
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
     if (!_didFinishExecutingBlock) {
-        [AllychatSDK connectToChat:^(ACRoom *chatRoom) {
+        [AllychatSDK connectToChat:^(BOOL isComplete) {
             _didFinishExecutingBlock = YES;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self performSegueWithIdentifier:@"segueToMessages" sender:sender];

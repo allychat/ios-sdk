@@ -168,8 +168,7 @@
     
     if (lastMesssageOfTheRoom) {
         
-        [self addAllyChatMesage:lastMesssageOfTheRoom];
-        
+        [self addAllyChatMesage:lastMesssageOfTheRoom];        
         [AllychatSDK messagesPreviousToMessage:lastMesssageOfTheRoom limit:MESSAGES_COUNT success:^(NSArray *messages) {
             [messages enumerateObjectsUsingBlock:^(ACMessage *messageModel, NSUInteger idx, BOOL * _Nonnull stop) {
                 [self addAllyChatMesage:messageModel];
@@ -282,6 +281,13 @@
     [self loadLastMessages:MESSAGES_COUNT];
     
     self.showLoadEarlierMessagesHeader = YES;
+    
+    /**
+     *  Register custom menu actions for cells.
+     */
+    [JSQMessagesCollectionViewCell registerMenuAction:@selector(customAction:)];
+    [UIMenuController sharedMenuController].menuItems = @[ [[UIMenuItem alloc] initWithTitle:@"Resend"
+                                                                                      action:@selector(customAction:)] ];
 }
 
 #pragma mark - JSQMessagesViewController method overrides
@@ -433,6 +439,38 @@
 }
 
 #pragma mark - UICollectionView Delegate
+
+#pragma mark - Custom menu items
+
+- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+    if (action == @selector(customAction:)) {
+        return YES;
+    }
+    
+    return [super collectionView:collectionView canPerformAction:action forItemAtIndexPath:indexPath withSender:sender];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+    if (action == @selector(customAction:)) {
+        [self customAction:sender];
+        return;
+    }
+    
+    [super collectionView:collectionView performAction:action forItemAtIndexPath:indexPath withSender:sender];
+}
+
+- (void)customAction:(id)sender
+{
+    AllyChatMessage *msg = [self.messages objectAtIndex:[self.collectionView indexPathForCell:sender].item];
+    ACMessage *msgObject = msg.messageModel;
+    [AllychatSDK resendMessage:msgObject withProgress:^(CGFloat progress) {
+        NSLog(@"%1.2f", progress);
+    } failure:^(NSError *error) {
+        NSLog(@"%@", error.localizedDescription);
+    }];
+}
 
 #pragma mark - Adjusting cell label heights
 
