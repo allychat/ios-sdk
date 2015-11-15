@@ -84,25 +84,27 @@ typedef NS_ENUM(NSInteger, AChatStatus) {
                           success:(void(^)(NSArray *messages))success
                           failure:(void (^)(NSError *error))failure;
 
-+ (void)unreadMessagesForRoom:(ACRoom *)room
-                      success:(void(^)(NSArray *messages))success
-                      failure:(void (^)(NSError *error))failure;
 
 #pragma mark - History With Support
 
 + (void)countMessagesWithSupport:(void(^)(NSUInteger count))success
-                         failure:(void (^)(NSError *error))failure;
+                         failure:(void(^)(NSError *error))failure;
 
 + (void)messagesWithSupportAndOffset:(NSInteger)offset
                                limit:(NSInteger)limit
                              success:(void(^)(NSArray *messages))success
                              failure:(void (^)(NSError *error))failure;
 
-/*
- - (void)failedMessages:(void(^)(NSArray *failedMessages))success
- failure:(void (^)(NSError *error))failure;
- 
- */
+#pragma mark - Optional Methods
+
++ (void)unreadMessagesForRoom:(ACRoom *)room
+                      success:(void(^)(NSArray *messages))success
+                      failure:(void (^)(NSError *error))failure;
+
++ (void)failedMessagesForRoom:(ACRoom *)room
+                      success:(void(^)(NSArray *failedMessages))success
+                      failure:(void (^)(NSError *error))failure;
+
 
 #pragma mark - Sending Messages To Support
 

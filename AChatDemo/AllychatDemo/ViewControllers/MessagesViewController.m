@@ -52,24 +52,23 @@
 - (void)didUpdateMessage:(ACMessage *)messageObj
                 toStatus:(ACMessageStatus)newStatus
 {
-    NSLog(@"%@ : %d", messageObj.innerId, newStatus);
-    
-    __block BOOL needToShow = YES;
-    [self.messages enumerateObjectsUsingBlock:^(AllyChatMessage *obj, NSUInteger idx, BOOL *stop) {
-        if ([obj.messageModel.innerId isEqualToString:messageObj.innerId]) {
-            if (newStatus == AC_DELIVERED) {
-                [self.messages removeObject:obj];
-            }
-            else
-            {
-                obj.messageModel.status = newStatus;
-                needToShow = NO;
-            }
-            *stop = YES;
-        }
-    }];
-    
     dispatch_async(dispatch_get_main_queue(), ^{
+        NSLog(@"%@ : %d", messageObj.innerId, newStatus);
+        
+        __block BOOL needToShow = YES;
+        [self.messages enumerateObjectsUsingBlock:^(AllyChatMessage *obj, NSUInteger idx, BOOL *stop) {
+            if ([obj.messageModel.innerId isEqualToString:messageObj.innerId]) {
+                if (newStatus == AC_DELIVERED) {
+                    [self.messages removeObject:obj];
+                }
+                else
+                {
+                    obj.messageModel.status = newStatus;
+                    needToShow = NO;
+                }
+                *stop = YES;
+            }
+        }];
         if (needToShow) {
             [JSQSystemSoundPlayer jsq_playMessageSentSound];
             [self addAllyChatMesage:messageObj];
@@ -84,26 +83,6 @@
 {
     NSLog(@"chat status is - > %d", newStatus);
 }
-
-//-(void)chat:(ACEngine *)engine didUpdateStatusFromStatus:(AChatStatus)oldSstatus toStatus:(AChatStatus)newStatus
-//{
-//    NSLog(@"%d - > %d", oldSstatus, newStatus);
-//    if (newStatus == AChatStatusOnline) {
-//        
-//        [[SharedEngine shared].engine unreadMessagesForRoomId:self.room.roomID completion:^(NSError *error, NSArray *unreadMessages) {
-//            for (ACMessageModel *msgObject in unreadMessages) {
-//                //Mark it read
-//                [[SharedEngine shared].engine readMessage:msgObject.messageId completion:^(NSError *error, bool isComplete) {
-//                    if (!isComplete) {
-//                        NSLog(@"%@", error);
-//                    }
-//                }];
-//                [self addAllyChatMesage:msgObject];
-//                [self finishReceivingMessageAnimated:YES];
-//            }
-//        }];
-//    }
-//}
 
 
 #pragma mark - AChat methods
@@ -138,25 +117,7 @@
         }
         message.messageModel = messageModel;
         [self.messages addObject:message];
-    }    
-}
-
-/**
- *  Load all failed Messages for the current Room
- */
--(void)loadFailedMessages
-{
-//    [[SharedEngine shared].engine failedMessagesForRoomId:self.room.roomID completion:^(NSError *error, NSArray *failedMessages) {
-//        if (failedMessages && error == nil) {
-//            if (failedMessages.count>0) {
-//                for (ACMessageModel *messageModel in failedMessages) {
-//                    [self addAllyChatMesage:messageModel];
-//                }
-//                [self.messages sortUsingDescriptors:@[ [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]]];
-//                [self finishReceivingMessageAnimated:YES];
-//            }
-//        }
-//    }];
+    }
 }
 
 /**
@@ -168,7 +129,7 @@
     
     if (lastMesssageOfTheRoom) {
         
-        [self addAllyChatMesage:lastMesssageOfTheRoom];        
+        [self addAllyChatMesage:lastMesssageOfTheRoom];
         [AllychatSDK messagesPreviousToMessage:lastMesssageOfTheRoom limit:MESSAGES_COUNT success:^(NSArray *messages) {
             [messages enumerateObjectsUsingBlock:^(ACMessage *messageModel, NSUInteger idx, BOOL * _Nonnull stop) {
                 [self addAllyChatMesage:messageModel];
@@ -275,8 +236,6 @@
     [super viewDidLoad];
     
     self.messages = [NSMutableArray array];
-    
-    [self loadFailedMessages];
     
     [self loadLastMessages:MESSAGES_COUNT];
     
