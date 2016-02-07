@@ -1,0 +1,1 @@
+../../../PHFComposeBarView/Classes/PHFComposeBarView.h

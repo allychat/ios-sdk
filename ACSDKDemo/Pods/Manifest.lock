@@ -1,0 +1,25 @@
+PODS:
+  - ACSDK (3.0)
+  - PHFComposeBarView (2.0.2):
+    - PHFDelegateChain (~> 1.0)
+  - PHFDelegateChain (1.0.1)
+  - SDWebImage (3.7.5):
+    - SDWebImage/Core (= 3.7.5)
+  - SDWebImage/Core (3.7.5)
+
+DEPENDENCIES:
+  - ACSDK (from `../`)
+  - PHFComposeBarView (~> 2.0.2)
+  - SDWebImage
+
+EXTERNAL SOURCES:
+  ACSDK:
+    :path: ../
+
+SPEC CHECKSUMS:
+  ACSDK: b1f87232d6d9509c67bcef0d407f28d39302bc94
+  PHFComposeBarView: 758c73ce54be681df97223bc61543dd8828ae0d3
+  PHFDelegateChain: 491f9cd8a3fb8761f390ff05f74a0e168d48d285
+  SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
+
+COCOAPODS: 0.39.0
