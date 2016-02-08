@@ -1,33 +1,8 @@
 # allychat-ios
 
-This is a full native iPhone app to create realtime chat with AllyChatSDK.
-<table>
-   <tr>   
-        <td>
-            <img src="https://cloud.githubusercontent.com/assets/1265098/8768935/3ba36026-2e99-11e5-9baf-734e0d2068b1.png" width ="160" height ="284">
-        </td>
-        <td>
-            <img src="https://cloud.githubusercontent.com/assets/1265098/8768938/3ba62e82-2e99-11e5-9a36-9592976c3697.png" width ="160" height ="284">
-        </td>
-        <td>
-            <img src="https://cloud.githubusercontent.com/assets/1265098/8768939/3ba60e0c-2e99-11e5-98cc-105db54b4dc4.png" width ="160" height ="284">
-        </td>
-    </tr>
-  <tr>
-    <td>
-        <img src="https://cloud.githubusercontent.com/assets/1265098/8768940/3ba72666-2e99-11e5-94d7-37e4c80007dc.png" width ="160" height ="284">
-    </td>
-    <td>
-        <img src="https://cloud.githubusercontent.com/assets/1265098/8768944/3bc1b904-2e99-11e5-9718-93e82729ac2d.png" width ="160" height ="284">
-    </td>
-    <td>
-        <img src="https://cloud.githubusercontent.com/assets/1265098/8768942/3bbe9b84-2e99-11e5-9a65-a76d22bca6df.png" width ="160" height ="284">
-    </td>
-  </tr>
- </table>
-<br>
+SDK для добавления в iOS-приложения функциональности обмена сообщениями в реальном времени.
 
-## REQUIREMENTS
+## Требования
 
 - Xcode 6
 - iOS 7.0
@@ -50,7 +25,7 @@ pod 'ACSDK', :git => "https://github.com/allychat/ios-sdk.git"
 
 ### С чего начать
 
-В начале советуем ознакомиться с демо-приложением в папке **ACSDKDemo**, которая содержит примеры использования различных возможностей SDK, таких как прием/отправку сообщений, подписку на Push-уведомления, вызовы методов REST API. Так как демо-проект использует систему управления зависимостями [CocoaPods](http://cocoapods.org), для просмотра необходимо открывать **AllychatDemo.xcworkspace**.
+В начале советуем ознакомиться с демо-приложением в папке **ACSDKDemo**, которое содержит примеры использования различных возможностей SDK, таких как прием/отправку сообщений, подписку на Push-уведомления, вызовы методов REST API. Так как демо-проект использует систему управления зависимостями [CocoaPods](http://cocoapods.org), для просмотра необходимо открывать **AllychatDemo.xcworkspace**.
 
 ## Нaчало работы
 
@@ -180,7 +155,7 @@ NSData *deviceToken = ...;
 #### Отправка местоположения на сервер
 
 ````objective-c
-CLLocation *myLocation = ...;
+CLLocation *location = ...;
 [[ACSDK defaultInstance] sendLocation:location];
 ````
 
