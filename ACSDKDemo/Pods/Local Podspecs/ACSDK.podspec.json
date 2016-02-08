@@ -1,0 +1,26 @@
+{
+  "name": "ACSDK",
+  "version": "3.0",
+  "summary": "The Allychat Framework.",
+  "license": {
+    "type": "MIT"
+  },
+  "homepage": "https://github.com/allychat/ios-sdk",
+  "authors": {
+    "Alexandr Turyev": "ekklesiarhia@gmail.com"
+  },
+  "platforms": {
+    "ios": "7.0"
+  },
+  "source": {
+    "git": "https://github.com/allychat/ios-sdk.git",
+    "tag": "3.0"
+  },
+  "frameworks": [
+    "Security",
+    "CFNetwork"
+  ],
+  "requires_arc": true,
+  "libraries": "icucore",
+  "vendored_frameworks": "ACSDK.framework"
+}
