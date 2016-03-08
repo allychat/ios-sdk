@@ -14,7 +14,6 @@
 
 #import "ACTextMessageModel.h"
 #import "ACImageMessageModel.h"
-#import "ACEventModel.h"
 
 #import "ACAuthorizationTokenModel.h"
 #import "ACPagingModel.h"

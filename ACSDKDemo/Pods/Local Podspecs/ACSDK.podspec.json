@@ -1,6 +1,6 @@
 {
   "name": "ACSDK",
-  "version": "3.0",
+  "version": "3.0.1",
   "summary": "The Allychat Framework.",
   "license": {
     "type": "MIT"
@@ -14,7 +14,7 @@
   },
   "source": {
     "git": "https://github.com/allychat/ios-sdk.git",
-    "tag": "3.0"
+    "tag": "3.0.1"
   },
   "frameworks": [
     "Security",
