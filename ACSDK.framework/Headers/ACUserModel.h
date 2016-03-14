@@ -36,6 +36,7 @@
 
 @interface ACUserModel : ACBaseModel <NSCoding>
 
+@property (nonatomic, readonly) NSString        *userId;
 @property (nonatomic, readonly) NSString        *alias;
 @property (nonatomic, readonly) NSString        *name;
 @property (nonatomic, readonly) NSURL           *avatarURL;

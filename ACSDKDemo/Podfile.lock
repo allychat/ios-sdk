@@ -1,5 +1,5 @@
 PODS:
-  - ACSDK (3.0.1)
+  - ACSDK (3.0.2)
   - PHFComposeBarView (2.0.2):
     - PHFDelegateChain (~> 1.0)
   - PHFDelegateChain (1.0.1)
@@ -17,7 +17,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  ACSDK: 6f8c97512a5501dd7233e1d19b180673c5d271b6
+  ACSDK: b0eb60dda01f3f52654ca22241c7c96642b10f83
   PHFComposeBarView: 758c73ce54be681df97223bc61543dd8828ae0d3
   PHFDelegateChain: 491f9cd8a3fb8761f390ff05f74a0e168d48d285
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
