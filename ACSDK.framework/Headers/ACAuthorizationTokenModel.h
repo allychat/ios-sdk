@@ -8,10 +8,18 @@
 
 #import "ACBaseModel.h"
 
-@interface ACAuthorizationTokenModel : ACBaseModel
+typedef NS_ENUM(NSUInteger, AuthorizationTokenModelType)
+{
+    AuthorizationTokenModelTypeLegacy,
+    AuthorizationTokenModelTypeOAuth
+};
 
-@property (nonatomic, readonly) NSString        *token;
-@property (nonatomic, readonly) BOOL            isExpired;
+@interface ACAuthorizationTokenModel : ACBaseModel <NSCoding>
+
+@property (nonatomic, copy) NSString        *token;
+@property (nonatomic, copy) NSString        *refreshToken;
+@property (nonatomic) BOOL            isExpired;
+@property (nonatomic) AuthorizationTokenModelType authorizationType;
 
 // temporary here :) waiting for Pachay's implementation
 - (void)markExpired;

@@ -35,6 +35,7 @@ typedef NS_ENUM(NSInteger, ACSDKErrors) {
     ACSDKUnknownError           = 1,
     ACSDKNotJSONError           = 2,
     ACSDKBadAliasError          = 3,
+    ACSDKBadCodeError          = 4,
 
     ACSDKAuthorizationError     = 1002,
     ACSDKUnknownAppIdError      = 1020,

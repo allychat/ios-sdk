@@ -18,6 +18,8 @@ extern NSString *const ACSDKDidUpdateMessageStatusNotification;
 extern NSString *const ACSDKDidUpdateUploadProgressNotification;
 extern NSString *const ACSDKDidPrepareMessageNotification;
 
+extern NSString *const ACSDKOauthTokensExpiredNotification;
+
 
 @class CLLocation;
 @class ACSDK;
@@ -31,6 +33,8 @@ extern NSString *const ACSDKDidPrepareMessageNotification;
 
 - (void)allyChatSDK:(ACSDK *)allyChatSDK didChangeSocketConnectionStatus:(ACSDKSocketConnectionStatus)connectionStatus;
 - (void)allyChatSDK:(ACSDK *)allyChatSDK didUpdateRooms:(NSArray *)rooms;
+
+- (void)allyChatSDKOauthTokensExpired:(ACSDK *)allyChatSDK;
 
 @end
 
@@ -68,6 +72,7 @@ extern NSString *const ACSDKDidPrepareMessageNotification;
 
 // auth
 - (void)signIn:(ACUserModel *)userModel completion:(void(^)(ACUserModel *userModel, NSError *error))completion;
+- (void)signInWithCode:(NSString *)code completion:(void(^)(ACUserModel *userModel, NSError *error))completion;
 - (void)signOut;
 
 // messages
