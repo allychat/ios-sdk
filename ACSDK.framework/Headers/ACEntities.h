@@ -15,7 +15,6 @@
 #import "ACTextMessageModel.h"
 #import "ACImageMessageModel.h"
 
-#import "ACAuthorizationTokenModel.h"
 #import "ACPagingModel.h"
 
 #endif /* ACEntities_h */
