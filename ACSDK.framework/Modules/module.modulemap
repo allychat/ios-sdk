@@ -1,6 +1,0 @@
-framework module ACSDK {
-  umbrella header "ACSDK.h"
-
-  export *
-  module * { export * }
-}

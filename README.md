@@ -37,7 +37,7 @@ pod 'ACSDK', :git => "https://github.com/allychat/ios-sdk.git"
 [[ACSDK defaultInstance] setApplicationId:@"app_id" serverURL:[NSURL URLWithString:@"https://example.com"]];
 ````
 
-#### Регистрация пользователя
+#### Регистрация/авторизация пользователя
 
 ````objective-c
 //Create new User
@@ -57,6 +57,20 @@ ACUserModel *user = [ACUserModel userWithAlias:@"ALIAS"];
 ````
 
 После успешной регистрации (авторизации) станет доступен список комнат.
+
+##### Кроссавторизация по Oauth.
+
+В SDK также имеется поддержка кроссавторизации:
+
+````objective-c
+[[ACSDK defaultInstance] signInWithCode:code completion:^(ACUserModel *userModel, NSError *error) {
+    if (error.domain == ACSDKErrorDomain && error.code == ACSDKBadCodeError) {
+        // obtain new auth code and try again, or just ignore
+    }
+}];
+````
+
+Если авторизацонный код не пустой, то он будет использован для получения новых токенов, иначе SDK будет использовать токены с предыдущей oauth авторизации. При необходимости обновить токены будет отправлено уведомление `ACSDKOauthTokensExpiredNotification` и вызван соответствующий метод делегата.
 
 #### Отправка сообщений
 
