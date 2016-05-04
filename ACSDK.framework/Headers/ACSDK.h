@@ -85,6 +85,7 @@ extern NSString *const ACSDKOauthTokensExpiredNotification;
 
 // rooms
 - (void)createRoomWithUser:(ACUserModel*)userModel completion:(void(^)(ACRoomModel *roomModel, NSError *error))completion;
+- (void)numberOfUnreadMessagesInRoom:(ACRoomModel*)roomModel completion:(void(^)(NSInteger unreadCount, NSError *error))completion;
 
 // APNs
 - (void)subscribeToAPNs:(NSData *)deviceToken;
