@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "ACSDK"
-  s.version      = "3.1.2"
+  s.version      = "3.1.3"
   s.summary      = "The Allychat Framework."
   s.license      = { :type => 'MIT' }
   s.homepage     = 'https://github.com/allychat/ios-sdk'

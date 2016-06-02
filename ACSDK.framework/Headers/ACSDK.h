@@ -53,6 +53,8 @@ extern NSString *const ACSDKOauthTokensExpiredNotification;
 
 // socket connection status
 @property (nonatomic, readonly) ACSDKSocketConnectionStatus     socketConnectionStatus;
+// default is YES
+@property (nonatomic, assign) BOOL                              openSocketConnectionAutomatically;
 
 // user
 @property (nonatomic, copy, readonly) ACUserModel               *userModel; // current user, could be nil
@@ -93,5 +95,9 @@ extern NSString *const ACSDKOauthTokensExpiredNotification;
 
 // geolocation
 - (void)sendLocation:(CLLocation*)location;
+
+// sockets
+- (void)openSocketConnection;
+- (void)closeSocketConnection;
 
 @end
