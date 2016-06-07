@@ -79,6 +79,8 @@ extern NSString *const ACSDKOauthTokensExpiredNotification;
 
 // messages
 - (void)sendMessage:(ACMessageModel *)messageModel;
+- (void)resendMessage:(ACMessageModel *)messageModel;
+- (void)removeMessage:(ACMessageModel *)messageModel;
 
 - (void)messagesAfterMessage:(ACMessageModel *)messageModel room:(ACRoomModel *)roomModel limit:(NSInteger)limit completion:(void(^)(NSArray *messages, BOOL hasMore, NSError *error))completion;
 - (void)messagesBeforeMessage:(ACMessageModel *)messageModel room:(ACRoomModel *)roomModel limit:(NSInteger)limit completion:(void(^)(NSArray *messages, BOOL hasMore, NSError *error))completion;
