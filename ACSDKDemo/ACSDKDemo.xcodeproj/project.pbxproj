@@ -18,7 +18,7 @@
 		041A15BD1C67EAA400BF708A /* ACCreateRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041A15B41C67EAA400BF708A /* ACCreateRoomViewController.m */; };
 		041A15BE1C67EAA400BF708A /* ACRoomsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041A15B61C67EAA400BF708A /* ACRoomsViewController.m */; };
 		041A15BF1C67EAA400BF708A /* ACTableViewRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041A15B81C67EAA400BF708A /* ACTableViewRoomCell.m */; };
-		8DE2C62D024901AA8C71C419 /* libPods-ACSDKDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8258C13A88149C5301BFE7C7 /* libPods-ACSDKDemo.a */; };
+		0F958A6316701CB3C27F73C1 /* libPods-ACSDKDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A7CADDCB94B53A04225AD6E /* libPods-ACSDKDemo.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,9 +44,9 @@
 		041A15B61C67EAA400BF708A /* ACRoomsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACRoomsViewController.m; sourceTree = "<group>"; };
 		041A15B71C67EAA400BF708A /* ACTableViewRoomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACTableViewRoomCell.h; sourceTree = "<group>"; };
 		041A15B81C67EAA400BF708A /* ACTableViewRoomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACTableViewRoomCell.m; sourceTree = "<group>"; };
-		2121F8F71FF0D9D4801470DD /* Pods-ACSDKDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACSDKDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ACSDKDemo/Pods-ACSDKDemo.debug.xcconfig"; sourceTree = "<group>"; };
-		8258C13A88149C5301BFE7C7 /* libPods-ACSDKDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ACSDKDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FF7841D93D09F4E285A429E1 /* Pods-ACSDKDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACSDKDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ACSDKDemo/Pods-ACSDKDemo.release.xcconfig"; sourceTree = "<group>"; };
+		2212508C09DD91D4053B26A9 /* Pods-ACSDKDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACSDKDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ACSDKDemo/Pods-ACSDKDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		4A7CADDCB94B53A04225AD6E /* libPods-ACSDKDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ACSDKDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		77781675A46A3742A659F1E6 /* Pods-ACSDKDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACSDKDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ACSDKDemo/Pods-ACSDKDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,7 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DE2C62D024901AA8C71C419 /* libPods-ACSDKDemo.a in Frameworks */,
+				0F958A6316701CB3C27F73C1 /* libPods-ACSDKDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,8 +66,8 @@
 			children = (
 				041A158F1C67E9D700BF708A /* ACSDKDemo */,
 				041A158E1C67E9D700BF708A /* Products */,
-				8BCC01AA84C3360EE9D3F614 /* Pods */,
-				AD9988111986CC20DC34975E /* Frameworks */,
+				09E199F31E555A43B3726B22 /* Pods */,
+				74C868160EF461C5967210EA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -139,19 +139,19 @@
 			path = Rooms;
 			sourceTree = "<group>";
 		};
-		8BCC01AA84C3360EE9D3F614 /* Pods */ = {
+		09E199F31E555A43B3726B22 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2121F8F71FF0D9D4801470DD /* Pods-ACSDKDemo.debug.xcconfig */,
-				FF7841D93D09F4E285A429E1 /* Pods-ACSDKDemo.release.xcconfig */,
+				2212508C09DD91D4053B26A9 /* Pods-ACSDKDemo.debug.xcconfig */,
+				77781675A46A3742A659F1E6 /* Pods-ACSDKDemo.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		AD9988111986CC20DC34975E /* Frameworks */ = {
+		74C868160EF461C5967210EA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8258C13A88149C5301BFE7C7 /* libPods-ACSDKDemo.a */,
+				4A7CADDCB94B53A04225AD6E /* libPods-ACSDKDemo.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -163,12 +163,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 041A15A41C67E9D700BF708A /* Build configuration list for PBXNativeTarget "ACSDKDemo" */;
 			buildPhases = (
-				5A590D7E76C64E2FC9302738 /* Check Pods Manifest.lock */,
+				49C87D452C1F341DEEAD0FC2 /* 📦 Check Pods Manifest.lock */,
 				041A15891C67E9D700BF708A /* Sources */,
 				041A158A1C67E9D700BF708A /* Frameworks */,
 				041A158B1C67E9D700BF708A /* Resources */,
-				6FD98D880D7279C5B1A6C71F /* Embed Pods Frameworks */,
-				0B24AC2BA17EC9D5C14E9A26 /* Copy Pods Resources */,
+				E20259D661CB08D3AD1E2826 /* 📦 Embed Pods Frameworks */,
+				F222BDCF52A45F66EF1DAA8C /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -224,29 +224,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0B24AC2BA17EC9D5C14E9A26 /* Copy Pods Resources */ = {
+		49C87D452C1F341DEEAD0FC2 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ACSDKDemo/Pods-ACSDKDemo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5A590D7E76C64E2FC9302738 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -254,19 +239,34 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		6FD98D880D7279C5B1A6C71F /* Embed Pods Frameworks */ = {
+		E20259D661CB08D3AD1E2826 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ACSDKDemo/Pods-ACSDKDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F222BDCF52A45F66EF1DAA8C /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ACSDKDemo/Pods-ACSDKDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -386,7 +386,7 @@
 		};
 		041A15A51C67E9D700BF708A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2121F8F71FF0D9D4801470DD /* Pods-ACSDKDemo.debug.xcconfig */;
+			baseConfigurationReference = 2212508C09DD91D4053B26A9 /* Pods-ACSDKDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ACSDKDemo/Info.plist;
@@ -398,7 +398,7 @@
 		};
 		041A15A61C67E9D700BF708A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FF7841D93D09F4E285A429E1 /* Pods-ACSDKDemo.release.xcconfig */;
+			baseConfigurationReference = 77781675A46A3742A659F1E6 /* Pods-ACSDKDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ACSDKDemo/Info.plist;

@@ -14,5 +14,6 @@
 
 - (instancetype)initWithTableView:(UITableView*)tableView andRoom:(ACRoomModel*)roomModel;
 - (id)objectAtIndexPath:(NSIndexPath*)indexPath;
+- (void)removeObjectAtIndexPath:(NSIndexPath*)indexPath;
 
 @end

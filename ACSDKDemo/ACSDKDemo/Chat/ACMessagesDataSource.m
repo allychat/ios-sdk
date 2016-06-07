@@ -64,6 +64,17 @@
     return nil;
 }
 
+- (void)removeObjectAtIndexPath:(NSIndexPath *)indexPath {
+    dispatch_async(self.dataSourceQueue, ^{
+        id obj = [self objectAtIndexPath:indexPath];
+        if (!obj) return;
+        [self beginUpdates];
+        [self.messages removeObject:obj];
+        [self performInsertions:nil deletions:@[indexPath] updates:nil];
+        [self endUpdates];
+    });
+}
+
 #pragma mark - Loading indicator
 
 - (void)showLoading {
@@ -87,10 +98,14 @@
     return self.messages.count;
 }
 
+- (void)configureCell:(ACMessageTableViewCell*)cell atIndexPath:(NSIndexPath*)indexPath {
+    cell.messageModel = [self objectAtIndexPath:indexPath];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ACMessageTableViewCell *cell = (ACMessageTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"ACMessageTableViewCell" forIndexPath:indexPath];
     cell.transform = CGAffineTransformMakeScale(1, -1);
-    cell.messageModel = [self objectAtIndexPath:indexPath];
+    [self configureCell:cell atIndexPath:indexPath];
     if (indexPath.row == self.messages.count - 1)
         [self fetchOldMessages];
     return cell;
@@ -111,42 +126,37 @@
         return;
     
     dispatch_async(self.dataSourceQueue, ^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView beginUpdates];
-            
-            // update existing messages
-            NSMutableArray *updatedIndexPaths = [NSMutableArray array];
-            for (ACMessageModel *messageModel in messages) {
-                NSInteger index = [self indexForMessage:messageModel];
-                if (index < self.messages.count && [self.messages[index] isEqual:messageModel]) {
-                    [updatedIndexPaths addObject:[NSIndexPath indexPathForRow:index inSection:0]];
-                    self.messages[index] = messageModel;
-                }
+        // update existing messages
+        NSMutableArray *updatedIndexPaths = [NSMutableArray array];
+        for (ACMessageModel *messageModel in messages) {
+            NSInteger index = [self indexForMessage:messageModel];
+            if (index < self.messages.count && [self.messages[index] isEqual:messageModel]) {
+                [updatedIndexPaths addObject:[NSIndexPath indexPathForRow:index inSection:0]];
+                self.messages[index] = messageModel;
             }
-            [self.tableView reloadRowsAtIndexPaths:updatedIndexPaths withRowAnimation:UITableViewRowAnimationNone];
-            [self.tableView endUpdates];
-            
-            [self.tableView beginUpdates];
-            
-            // insert new messages
-            NSMutableArray *insertedIndexPaths = [NSMutableArray array];
-            
-            for (ACMessageModel *messageModel in messages.reverseObjectEnumerator) {
-                NSInteger index = [self indexForMessage:messageModel];
-                if (index < self.messages.count && [self.messages[index] isEqual:messageModel]) {
-                    // skip update
-                } else {
-                    [insertedIndexPaths addObject:[NSIndexPath indexPathForRow:index inSection:0]];
-                    [self.messages insertObject:messageModel atIndex:index];
-                }
+        }
+        
+        
+        [self beginUpdates];
+        
+        // insert new messages
+        NSMutableArray *insertedIndexPaths = [NSMutableArray array];
+        for (ACMessageModel *messageModel in messages.reverseObjectEnumerator) {
+            NSInteger index = [self indexForMessage:messageModel];
+            if (index < self.messages.count && [self.messages[index] isEqual:messageModel]) {
+                // skip update
+            } else {
+                [insertedIndexPaths addObject:[NSIndexPath indexPathForRow:index inSection:0]];
+                [self.messages insertObject:messageModel atIndex:index];
             }
-            [self.tableView insertRowsAtIndexPaths:insertedIndexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-            [self.tableView endUpdates];
-            
-            for (ACMessageModel *messageModel in messages) {
-                [[ACSDK defaultInstance] setReadForMessage:messageModel];
-            }
-        });
+        }
+        
+        [self performInsertions:insertedIndexPaths deletions:nil updates:updatedIndexPaths];
+        [self endUpdates];
+        
+        for (ACMessageModel *messageModel in messages) {
+            [[ACSDK defaultInstance] setReadForMessage:messageModel];
+        }
     });
 }
 
@@ -200,4 +210,27 @@
         [self addMessages:@[messageModel]];
     }
 }
+
+#pragma mark - Updates
+
+- (void)beginUpdates {
+    [self.tableView performSelectorOnMainThread:@selector(beginUpdates) withObject:nil waitUntilDone:YES];
+}
+
+- (void)endUpdates {
+    [self.tableView performSelectorOnMainThread:@selector(endUpdates) withObject:nil waitUntilDone:YES];
+}
+
+- (void)performInsertions:(NSArray*)insertedIndexPaths deletions:(NSArray*)deletedIndexPaths updates:(NSArray*)updatedIndexPaths {
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        for (NSIndexPath *indexPath in updatedIndexPaths) {
+            [self configureCell:[self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+        }
+        if (insertedIndexPaths.count)
+            [self.tableView insertRowsAtIndexPaths:insertedIndexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+        if (deletedIndexPaths.count)
+            [self.tableView deleteRowsAtIndexPaths:deletedIndexPaths withRowAnimation:UITableViewRowAnimationFade];
+    });
+}
+
 @end

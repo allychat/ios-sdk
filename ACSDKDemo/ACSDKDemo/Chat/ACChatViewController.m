@@ -78,9 +78,6 @@ const CGFloat controlsHeight = 44.0;
     [_composeBarView.button setTitleColor:_composeBarView.utilityButton.tintColor forState:UIControlStateDisabled];
     [self.view addSubview:self.composeBarView];
     
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
-    [self.view addGestureRecognizer:tapRecognizer];
-    
     _dataSource = [[ACMessagesDataSource alloc] initWithTableView:self.tableView andRoom:self.roomModel];
 }
 
@@ -171,13 +168,18 @@ const CGFloat controlsHeight = 44.0;
     return [cell.contentView systemLayoutSizeFittingSize:fittingSize withHorizontalFittingPriority:UILayoutPriorityRequired verticalFittingPriority:UILayoutPriorityDefaultLow].height;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    ACMessageModel *message = [self.dataSource objectAtIndexPath:indexPath];
+    [self.view endEditing:YES];
+    if (message.status == ACMessageStatusFailed) {
+        [self.dataSource removeObjectAtIndexPath:indexPath];
+        [[ACSDK defaultInstance] resendMessage:message];
+    }
+}
+
 #pragma mark - notifications
 
 #pragma mark * keyboard
-
-- (void)dismissKeyboard:(UIGestureRecognizer*)recognizer {
-    [self.view endEditing:YES];
-}
 
 - (void)keyboardWillAppearNotification:(NSNotification *)notification {
     CGRect keyboardFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
