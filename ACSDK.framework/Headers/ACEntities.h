@@ -15,6 +15,12 @@
 #import "ACTextMessageModel.h"
 #import "ACImageMessageModel.h"
 
+
+#import "ACPayloadButton.h"
+#import "ACPayloadElement.h"
+#import "ACPayloadModel.h"
+#import "ACRichMessageModel.h"
+
 #import "ACPagingModel.h"
 
 #endif /* ACEntities_h */
